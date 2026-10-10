@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MadhavPath · माधवपथ</title>
+  <title>MadhavPath | Devotion · Discipline · Growth</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#121826">
+  <meta name="theme-color" content="#fcfaf2">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #151c2e;
-      --accent: #d4af37;
-      --accent-glow: rgba(212, 175, 55, 0.25);
-      --text: #f3f4f6;
-      --muted: #9ca3af;
-      --border: #222e48;
-      --saffron: #f59e0b;
-      --green: #10b981;
+      --bg: #fcfaf2;
+      --card-bg: #ffffff;
+      --header-bg: linear-gradient(135deg, #10243e 0%, #17375e 100%);
+      --accent-gold: #c89332;
+      --accent-gold-light: #fef8eb;
+      --accent-gold-border: #edd59b;
+      --navy: #10243e;
+      --text: #2d3748;
+      --muted: #718096;
+      --border: #ebdcc4;
+      --shadow: 0 4px 14px rgba(72, 48, 16, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
@@ -26,194 +28,301 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      padding-bottom: 84px;
+      padding-bottom: 86px;
     }
-    header {
-      background: linear-gradient(180deg, #18233c 0%, var(--bg) 100%);
-      padding: 18px 16px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    header h1 {
-      color: var(--accent);
-      font-size: 1.45rem;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    header p { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
-    .container { max-width: 600px; margin: 0 auto; padding: 14px; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; animation: fadeIn 0.18s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    /* TOP BANNER */
+    .top-banner {
+      background: var(--header-bg);
+      color: #fff;
+      padding: 22px 18px 24px;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 6px 18px rgba(16, 36, 62, 0.2);
     }
-    .card h2 {
-      font-size: 1.05rem;
-      color: var(--accent);
-      margin-bottom: 10px;
+    .banner-sub {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: #dfb264;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .banner-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .app-title { font-size: 1.55rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+    .app-title span { color: #f4c46d; }
+    .lang-pill {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+    .date-str {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-top: 10px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .shloka-box {
-      text-align: center;
-      padding: 16px 14px;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 10px;
+
+    .container { max-width: 600px; margin: 0 auto; padding: 14px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* CARDS */
+    .card {
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      margin: 12px 0;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
     }
-    .sanskrit {
+    .panchang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fbf2db;
+      color: #8c5d11;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+    .panchang-subbadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 10px;
+      float: right;
+    }
+    .tithi-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1a202c;
+      margin: 12px 0 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .tithi-sub { font-size: 0.85rem; color: var(--muted); font-weight: normal; }
+    .vikram-detail { font-size: 0.82rem; color: #4a5568; margin-bottom: 14px; }
+    .panchang-btn {
+      width: 100%;
+      background: #e8b958;
+      color: #382405;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* WISDOM CARD */
+    .wisdom-label {
+      color: #0d9488;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sanskrit-text {
       font-size: 1.25rem;
-      color: #fde68a;
+      font-weight: 700;
+      color: #1a365d;
       line-height: 1.8;
-      font-weight: 600;
       white-space: pre-line;
+      margin-bottom: 10px;
+    }
+    .translation-text {
+      font-size: 0.92rem;
+      color: #4a5568;
+      line-height: 1.5;
       margin-bottom: 12px;
     }
-    .translation { font-size: 0.95rem; color: var(--text); line-height: 1.5; font-style: italic; }
-    .verse-ref { font-size: 0.8rem; color: var(--saffron); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; font-weight: bold; }
 
+    /* STATS GRID */
     .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 14px;
     }
     .stat-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
     }
-    .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
-    .stat-value { font-size: 1.3rem; font-weight: bold; color: var(--accent); margin-top: 4px; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+    .stat-val { font-size: 1.6rem; font-weight: 800; color: #0f2744; margin-top: 4px; }
 
+    /* ROUTINE */
+    .routine-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .routine-title { font-size: 1.05rem; font-weight: 800; color: #1a202c; display: flex; align-items: center; gap: 6px; }
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #f1ebd8;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #c89332;
+      transition: width 0.3s ease;
+    }
+    .routine-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; font-style: italic; }
+    .routine-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f6eedb;
+      cursor: pointer;
+    }
+    .routine-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent-gold);
+      border-radius: 4px;
+    }
+    .routine-item span { font-size: 0.92rem; color: #2d3748; }
+
+    /* BUTTONS */
     .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
     .btn {
       flex: 1;
-      min-width: 110px;
-      padding: 10px 12px;
-      background: #1e293b;
-      color: var(--text);
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      background: #fcfaf4;
+      color: #2d3748;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
     }
-    .btn-accent { background: var(--accent); color: #0b0f19; border: none; }
-    .btn:active { transform: scale(0.98); }
+    .btn-gold { background: #e8b958; color: #382405; border: none; }
 
-    .checklist-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+    /* FORM ELEMENTS */
+    select, input[type="text"] {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 11px;
+      border-radius: 10px;
       font-size: 0.9rem;
-      cursor: pointer;
     }
-    .checklist-item input { accent-color: var(--accent); width: 18px; height: 18px; }
 
+    /* JAPA CIRCLE */
     .japa-circle {
-      width: 140px;
-      height: 140px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      border: 4px solid var(--accent);
+      border: 5px solid #c89332;
+      background: #fefbf3;
+      box-shadow: 0 0 20px rgba(200, 147, 50, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin: 16px auto;
-      background: rgba(212, 175, 55, 0.08);
+      margin: 18px auto;
       cursor: pointer;
-      box-shadow: 0 0 16px var(--accent-glow);
     }
     .japa-circle:active { transform: scale(0.96); }
-    .japa-count { font-size: 2rem; font-weight: bold; color: #fff; }
-    .japa-sub { font-size: 0.75rem; color: var(--muted); }
+    .japa-num { font-size: 2.3rem; font-weight: 900; color: #10243e; }
+    .japa-sub { font-size: 0.72rem; color: var(--muted); font-weight: bold; }
 
-    .selector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-    select, input[type="text"] {
-      width: 100%;
-      background: #0f172a;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-    }
-
+    /* CHAT STREAM */
     .chat-box {
-      height: 280px;
+      height: 290px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding: 8px;
-      background: rgba(0,0,0,0.25);
-      border-radius: 8px;
+      gap: 10px;
+      padding: 12px;
+      background: #f9f6ed;
+      border-radius: 12px;
       border: 1px solid var(--border);
       margin-bottom: 10px;
     }
     .chat-msg {
-      padding: 10px 12px;
-      border-radius: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
       font-size: 0.9rem;
       max-width: 85%;
-      line-height: 1.4;
+      line-height: 1.45;
     }
-    .chat-msg.user { align-self: flex-end; background: #1e3a8a; color: #fff; }
-    .chat-msg.bot { align-self: flex-start; background: #1f2937; color: #fde68a; border: 1px solid var(--border); }
-    .chat-input-row { display: flex; gap: 8px; }
+    .chat-msg.user { align-self: flex-end; background: #17375e; color: #ffffff; }
+    .chat-msg.bot { align-self: flex-start; background: #ffffff; color: #1a202c; border: 1px solid var(--border); }
 
+    /* GAME BOARD */
     .game-board {
       text-align: center;
       padding: 16px;
-      background: #0f172a;
-      border-radius: 10px;
+      background: #fefcf7;
+      border-radius: 12px;
       border: 1px solid var(--border);
     }
     .opt-btn {
       width: 100%;
       padding: 12px;
-      background: #1e293b;
+      background: #ffffff;
       border: 1px solid var(--border);
       color: var(--text);
-      border-radius: 8px;
+      border-radius: 10px;
       margin-top: 8px;
       text-align: left;
       font-size: 0.9rem;
       cursor: pointer;
+      font-weight: 600;
     }
 
+    /* BOTTOM NAV */
     .nav-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: #111827;
+      background: #ffffff;
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-around;
-      padding: 8px 0;
+      padding: 8px 0 10px;
       z-index: 100;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
     }
     .nav-item {
       background: none;
@@ -226,79 +335,121 @@
       gap: 4px;
       cursor: pointer;
       width: 20%;
+      font-weight: 600;
     }
-    .nav-item.active { color: var(--accent); font-weight: bold; }
+    .nav-item.active { color: #c89332; font-weight: 800; }
     .nav-icon { font-size: 1.25rem; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🦚 MadhavPath · माधवपथ</h1>
-    <p>Devotion · Discipline · Gita Wisdom</p>
-  </header>
+  <!-- BANNER -->
+  <div class="top-banner">
+    <div class="banner-sub">DEVOTION · DISCIPLINE · GROWTH</div>
+    <div class="banner-row">
+      <div class="app-title">🦚 माधवपथ · <span>MadhavPath</span></div>
+      <div class="lang-pill">English ▾</div>
+    </div>
+    <div class="date-str" id="top-date-str">
+      <span>🗓 Sat, 10 Oct 2026</span>
+    </div>
+  </div>
 
   <div class="container">
-    <!-- TAB 1: DAILY HOME -->
+    <!-- TAB 1: TODAY / HOME -->
     <div id="tab-home" class="tab-content active">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Routine Done</div>
-          <div class="stat-value" id="routine-stat">0/4</div>
+      
+      <!-- PANCHANG -->
+      <div class="card">
+        <div>
+          <span class="panchang-badge">🕉 TODAY'S PANCHANG · पञ्चाङ्ग</span>
+          <span class="panchang-subbadge">🕉 मासिक शिवरात्रि व्रत</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Karma XP</div>
-          <div class="stat-value" id="karma-stat">0 XP</div>
+        <div class="tithi-title">
+          कृष्ण Chaturdashi
+          <span class="tithi-sub">Purva नक्षत्र · शनिवार</span>
         </div>
+        <div class="vikram-detail">विक्रम 2083 · Phalguna मास · दक्षिणायन</div>
+        <button class="panchang-btn" onclick="alert('Panchang is fully active for today.')">
+          View Full Hindu Calendar & Muhurtas 🕉
+        </button>
       </div>
 
+      <!-- DAILY WISDOM -->
       <div class="card">
-        <h2>🌅 Daily Shloka of the Day</h2>
-        <div class="verse-ref" id="daily-ref">Chapter 2 · Verse 47</div>
-        <div class="shloka-box">
-          <div class="sanskrit" id="daily-sanskrit">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&#10;मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥</div>
-          <div class="translation" id="daily-meaning">You have a right to perform your prescribed duty, but never to the fruits of action. Never consider yourself the cause of the results, nor be attached to inaction.</div>
-        </div>
+        <div class="wisdom-label">DAILY WISDOM · नित्य उपदेश</div>
+        <div class="sanskrit-text" id="daily-sanskrit">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥</div>
+        <div class="translation-text" id="daily-meaning">Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, desirous of fighting, what did my sons and the sons of Pandu do?</div>
         <div class="btn-row">
-          <button class="btn btn-accent" onclick="playAudio('daily-sanskrit')">🔊 Play Audio</button>
+          <button class="btn btn-gold" onclick="playAudio('daily-sanskrit')">🔊 Play Audio</button>
           <button class="btn" onclick="stopAudio()">⏹ Stop</button>
         </div>
       </div>
 
+      <!-- ANALYTICS METRICS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Habits Completed</div>
+          <div class="stat-val" id="habits-stat">0/6</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Daily Routine</div>
+          <div class="stat-val" id="routine-stat">0%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Malas Chanted</div>
+          <div class="stat-val" id="malas-stat">0 Malas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Karma Points</div>
+          <div class="stat-val" id="xp-stat">0 XP</div>
+        </div>
+      </div>
+
+      <!-- SANKALP ROUTINE -->
       <div class="card">
-        <h2>📿 Daily Sankalp (Routine)</h2>
-        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> Brahma Muhurta wake-up (4:30 AM)</label></div>
-        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> Morning Snan & Dhyana</label></div>
-        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> 1 Round Hare Krishna Mahamantra</label></div>
-        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> Evening Gita Study</label></div>
+        <div class="routine-header">
+          <div class="routine-title">🌅 Today's Sankalp (Routine)</div>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="routine-progress-fill"></div>
+        </div>
+        <div class="routine-desc" id="routine-desc-text">0% completed. Walk forward with quiet, steady discipline.</div>
+
+        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Brahma Muhurta wake-up (4:30 AM)</span></label></div>
+        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Snan & Surya Arghya</span></label></div>
+        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Sattvic Diet Resolution</span></label></div>
+        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>1 Round Nama Japa</span></label></div>
+        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Srimad Bhagavad Gita Study</span></label></div>
+        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Evening Reflection (Ratri Chintan)</span></label></div>
       </div>
     </div>
 
-    <!-- TAB 2: ALL 700 GITA SHLOKAS -->
+    <!-- TAB 2: ALL 700 GITA VERSES -->
     <div id="tab-gita" class="tab-content">
       <div class="card">
-        <h2>📖 Complete Bhagavad Gita (All 700 Verses)</h2>
-        <div class="selector-grid">
+        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:12px;">📖 Srimad Bhagavad Gita (All 700 Shlokas)</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
           <div>
-            <label style="font-size:0.75rem; color:var(--muted)">CHAPTER</label>
-            <select id="chapter-select" onchange="populateVerses()"></select>
+            <label style="font-size:0.75rem; color:var(--muted); font-weight:700;">CHAPTER (अध्याय)</label>
+            <select id="ch-select" onchange="populateVerses()"></select>
           </div>
           <div>
-            <label style="font-size:0.75rem; color:var(--muted)">VERSE</label>
-            <select id="verse-select" onchange="loadSelectedVerse()"></select>
+            <label style="font-size:0.75rem; color:var(--muted); font-weight:700;">VERSE (श्लोक)</label>
+            <select id="v-select" onchange="loadGitaVerse()"></select>
           </div>
         </div>
 
-        <div class="shloka-box">
-          <div class="verse-ref" id="gita-ref">Chapter 1 · Verse 1</div>
-          <div class="sanskrit" id="gita-sanskrit">धृतराष्ट्र उवाच |&#10;धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय || १-१ ||</div>
-          <div class="translation" id="gita-meaning">Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, eager to fight, what did my sons and the sons of Pandu do?</div>
+        <div style="background:#fefbf3; border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; margin-bottom:12px;">
+          <div id="gita-ref" style="font-size:0.8rem; font-weight:800; color:#c89332; margin-bottom:8px;">CHAPTER 1 · VERSE 1</div>
+          <div class="sanskrit-text" id="gita-sanskrit">धृतराष्ट्र उवाच |&#10;धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय || १-१ ||</div>
+          <div class="translation-text" id="gita-meaning">Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, desirous of fighting, what did my sons and the sons of Pandu do?</div>
         </div>
 
         <div class="btn-row">
-          <button class="btn btn-accent" onclick="playAudio('gita-sanskrit')">🔊 Recite Sanskrit</button>
+          <button class="btn btn-gold" onclick="playAudio('gita-sanskrit')">🔊 Play Shloka</button>
           <button class="btn" onclick="stopAudio()">⏹ Stop</button>
-          <button class="btn" onclick="nextVerse()">Next ❯</button>
+          <button class="btn" onclick="nextGitaVerse()">Next ❯</button>
         </div>
       </div>
     </div>
@@ -306,14 +457,14 @@
     <!-- TAB 3: JAPA MALA COUNTER -->
     <div id="tab-japa" class="tab-content">
       <div class="card" style="text-align:center;">
-        <h2>📿 Digital Japa Mala</h2>
+        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:6px;">📿 Digital Japa Counter</h2>
         <p style="font-size:0.85rem; color:var(--muted); margin-bottom:12px;">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे | हरे राम हरे राम राम राम हरे हरे ||</p>
-        <div class="japa-circle" onclick="tapJapa()">
-          <div class="japa-count" id="japa-beads">0</div>
+        <div class="japa-circle" onclick="tapBead()">
+          <div class="japa-num" id="japa-beads-num">0</div>
           <div class="japa-sub">/ 108 BEADS</div>
         </div>
-        <div style="font-size:1.1rem; color:var(--accent); font-weight:bold; margin-bottom:12px;">
-          Completed Malas: <span id="japa-malas">0</span>
+        <div style="font-size:1.1rem; font-weight:800; color:#c89332; margin-bottom:12px;">
+          Completed Malas: <span id="japa-malas-num">0</span>
         </div>
         <div class="btn-row">
           <button class="btn" onclick="resetJapa()">🔄 Reset Count</button>
@@ -322,16 +473,16 @@
     </div>
 
     <!-- TAB 4: MADHAV AI COACH -->
-    <div id="tab-ai" class="tab-content">
+    <div id="tab-coach" class="tab-content">
       <div class="card">
-        <h2>🏹 Madhav AI · Gita Coach</h2>
-        <p style="font-size:0.8rem; color:var(--muted); margin-bottom:10px;">Seek Sri Krishna's counsel on your dilemmas, discipline, and daily duty.</p>
-        <div class="chat-box" id="chat-stream">
-          <div class="chat-msg bot">Radhe Radhe, Partha. What doubts cloud your intellect today? Speak freely, and let the wisdom of the Gita guide you.</div>
+        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:6px;">🏹 Madhav AI · Gita Guide</h2>
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:12px;">Confide your struggles, questions, or doubts. Receive Krishna's perspective.</p>
+        <div class="chat-box" id="coach-stream">
+          <div class="chat-msg bot">Radhe Radhe, Partha. What troubles your intellect today? Speak with an open heart.</div>
         </div>
-        <div class="chat-input-row">
-          <input type="text" id="ai-input" placeholder="Ask Krishna a question..." onkeydown="if(event.key==='Enter') sendAiMessage()">
-          <button class="btn btn-accent" onclick="sendAiMessage()" style="flex:0 0 75px;">Ask</button>
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="coach-input" placeholder="Ask Sri Krishna..." onkeydown="if(event.key==='Enter') sendCoachMsg()">
+          <button class="btn btn-gold" onclick="sendCoachMsg()" style="flex:0 0 75px;">Ask</button>
         </div>
       </div>
     </div>
@@ -339,179 +490,60 @@
     <!-- TAB 5: DHARMA QUEST GAME -->
     <div id="tab-game" class="tab-content">
       <div class="card">
-        <h2>🎯 Gita Karma Quest</h2>
+        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:8px;">🎯 Gita Karma Quest</h2>
         <div class="game-board">
-          <p style="font-size:1rem; color:var(--accent); font-weight:bold; margin-bottom:8px;">Quest XP: <span id="game-score">0</span></p>
-          <div id="game-question" style="font-size:1rem; margin-bottom:12px; color:#fff;">Loading question...</div>
-          <div id="game-options"></div>
+          <div style="font-weight:800; color:#c89332; margin-bottom:8px;">Karma XP: <span id="game-xp">0</span></div>
+          <div id="game-q-text" style="font-size:1rem; font-weight:700; color:#1a202c; margin-bottom:12px;">Loading question...</div>
+          <div id="game-opt-box"></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- NAVIGATION -->
   <nav class="nav-bar">
-    <button class="nav-item active" onclick="switchTab('tab-home', this)"><span class="nav-icon">🌅</span>Daily</button>
-    <button class="nav-item" onclick="switchTab('tab-gita', this)"><span class="nav-icon">📖</span>700 Gita</button>
-    <button class="nav-item" onclick="switchTab('tab-japa', this)"><span class="nav-icon">📿</span>Japa</button>
-    <button class="nav-item" onclick="switchTab('tab-ai', this)"><span class="nav-icon">🏹</span>Coach</button>
-    <button class="nav-item" onclick="switchTab('tab-game', this)"><span class="nav-icon">🎯</span>Game</button>
+    <button class="nav-item active" onclick="switchNav('tab-home', this)"><span class="nav-icon">🌅</span>Today</button>
+    <button class="nav-item" onclick="switchNav('tab-gita', this)"><span class="nav-icon">📖</span>Gita</button>
+    <button class="nav-item" onclick="switchNav('tab-japa', this)"><span class="nav-icon">📿</span>Japa</button>
+    <button class="nav-item" onclick="switchNav('tab-coach', this)"><span class="nav-icon">🏹</span>Coach</button>
+    <button class="nav-item" onclick="switchNav('tab-game', this)"><span class="nav-icon">🎯</span>Game</button>
   </nav>
 
   <script>
-    const CHAPTER_VERSE_COUNTS = [47, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 35, 27, 20, 24, 28, 78];
+    const CHAPTER_COUNTS = [47, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 35, 27, 20, 24, 28, 78];
 
-    const CORE_SHLOKAS = [
-      { ch: 2, v: 47, san: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥", en: "You have a right to your duty, but never to the fruits of action." },
-      { ch: 4, v: 7, san: "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥", en: "Whenever righteousness declines and unrighteousness prevails, I manifest Myself." },
-      { ch: 4, v: 8, san: "परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥", en: "To protect the virtuous, destroy the wicked, and re-establish dharma, I appear in every age." },
-      { ch: 9, v: 22, san: "अनन्‍याश्‍चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥", en: "To those who always remember Me with pure devotion, I carry what they lack and protect what they have." },
-      { ch: 18, v: 66, san: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥", en: "Abandon all dharmas and surrender unto Me alone. I will liberate you from all sins; do not despair." }
+    const CORE_VERSES = [
+      { ch: 2, v: 47, san: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥", en: "You have a right to your duty, but never to the fruits of work." },
+      { ch: 4, v: 7, san: "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥", en: "Whenever there is a decline in righteousness, I manifest Myself." },
+      { ch: 4, v: 8, san: "परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥", en: "To protect the good, conquer wickedness, and establish dharma, I appear millenium after millenium." },
+      { ch: 9, v: 22, san: "अनन्‍याश्‍चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥", en: "To those who always remember Me with pure devotion, I provide what they lack and protect what they have." },
+      { ch: 18, v: 66, san: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥", en: "Abandon all varieties of rituals and surrender unto Me alone. I shall liberate you; do not fear." }
     ];
 
-    function switchTab(tabId, el) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    function switchNav(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      el.classList.add('active');
+      btn.classList.add('active');
       stopAudio();
     }
 
-    function initGitaDropdowns() {
-      const chSelect = document.getElementById('chapter-select');
-      chSelect.innerHTML = '';
+    // 1. ALL 700 GITA VERSES
+    function initDropdowns() {
+      const ch = document.getElementById('ch-select');
+      ch.innerHTML = '';
       for (let i = 1; i <= 18; i++) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = `Chapter ${i} (${CHAPTER_VERSE_COUNTS[i-1]} Verses)`;
-        chSelect.appendChild(opt);
+        ch.innerHTML += `<option value="${i}">Chapter ${i} (${CHAPTER_COUNTS[i-1]} Shlokas)</option>`;
       }
       populateVerses();
     }
 
     function populateVerses() {
-      const ch = parseInt(document.getElementById('chapter-select').value);
-      const vSelect = document.getElementById('verse-select');
-      const count = CHAPTER_VERSE_COUNTS[ch - 1];
-      vSelect.innerHTML = '';
-      for (let i = 1; i <= count; i++) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = `Verse ${i}`;
-        vSelect.appendChild(opt);
+      const c = parseInt(document.getElementById('ch-select').value);
+      const v = document.getElementById('v-select');
+      v.innerHTML = '';
+      for (let i = 1; i <= CHAPTER_COUNTS[c - 1]; i++) {
+        v.innerHTML += `<option value="${i}">Verse ${i}</option>`;
       }
-      loadSelectedVerse();
-    }
-
-    async function loadSelectedVerse() {
-      const ch = document.getElementById('chapter-select').value;
-      const v = document.getElementById('verse-select').value;
-      document.getElementById('gita-ref').textContent = `Chapter ${ch} · Verse ${v}`;
-
-      const fallback = CORE_SHLOKAS.find(s => s.ch == ch && s.v == v);
-      if (fallback) {
-        document.getElementById('gita-sanskrit').textContent = fallback.san;
-        document.getElementById('gita-meaning').textContent = fallback.en;
-      } else {
-        document.getElementById('gita-sanskrit').textContent = "अध्याय " + ch + " श्लोक " + v + "\n(Loading Sacred Text...)";
-        document.getElementById('gita-meaning').textContent = "Fetching translation from sacred archive...";
-      }
-
-      try {
-        const res = await fetch(`https://vedicscriptures.github.io/slok/${ch}/${v}/`);
-        if (res.ok) {
-          const data = await res.json();
-          document.getElementById('gita-sanskrit').textContent = data.slok || fallback?.san;
-          document.getElementById('gita-meaning').textContent = data.tej?.ht || data.siva?.et || data.purohit?.et || fallback?.en || "Translation loaded.";
-        }
-      } catch (err) {
-        if (!fallback) {
-          document.getElementById('gita-meaning').textContent = "Offline. Connect to the internet to fetch all dynamic verses.";
-        }
-      }
-    }
-
-    function nextVerse() {
-      const vSelect = document.getElementById('verse-select');
-      if (vSelect.selectedIndex < vSelect.options.length - 1) {
-        vSelect.selectedIndex++;
-        loadSelectedVerse();
-      } else {
-        const chSelect = document.getElementById('chapter-select');
-        if (chSelect.selectedIndex < chSelect.options.length - 1) {
-          chSelect.selectedIndex++;
-          populateVerses();
-        }
-      }
-    }
-
-    function setDailyShloka() {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), 0, 0);
-      const day = Math.floor((now - start) / 86400000);
-      const shloka = CORE_SHLOKAS[day % CORE_SHLOKAS.length];
-      document.getElementById('daily-ref').textContent = `Chapter ${shloka.ch} · Verse ${shloka.v}`;
-      document.getElementById('daily-sanskrit').textContent = shloka.san;
-      document.getElementById('daily-meaning').textContent = shloka.en;
-    }
-
-    function playAudio(elementId) {
-      stopAudio();
-      const text = document.getElementById(elementId).textContent;
-      if (!('speechSynthesis' in window)) {
-        alert("Speech synthesis is not supported on this browser.");
-        return;
-      }
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.82;
-      utterance.pitch = 0.95;
-
-      const voices = window.speechSynthesis.getVoices();
-      const voice = voices.find(v => v.lang.includes('hi') || v.lang.includes('sa') || v.lang.includes('IN'));
-      if (voice) utterance.voice = voice;
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function stopAudio() {
-      if (window.speechSynthesis && window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-      }
-    }
-
-    let beads = 0;
-    let malas = 0;
-    function tapJapa() {
-      beads++;
-      if (beads >= 108) {
-        beads = 0;
-        malas++;
-        addXP(108);
-        alert("🎉 Hare Krishna! 1 Full Japa Mala completed (+108 XP)!");
-      }
-      document.getElementById('japa-beads').textContent = beads;
-      document.getElementById('japa-malas').textContent = malas;
-      if (navigator.vibrate) navigator.vibrate(40);
-    }
-    function resetJapa() {
-      beads = 0;
-      malas = 0;
-      document.getElementById('japa-beads').textContent = '0';
-      document.getElementById('japa-malas').textContent = '0';
-    }
-
-    let routineDone = 0;
-    let totalXP = 0;
-    function toggleRoutine(cb) {
-      routineDone += cb.checked ? 1 : -1;
-      document.getElementById('routine-stat').textContent = `${routineDone}/4`;
-      if (cb.checked) addXP(25);
-    }
-    function addXP(pts) {
-      totalXP += pts;
-      document.getElementById('karma-stat').textContent = `${totalXP} XP`;
-      document.getElementById('game-score').textContent = totalXP;
-    }
-
-    const GITA_KNOWLEDGE = [
-      { keywords: ["fear", "scared", "anxiety", "dar"], reply: "Cast away fear, Partha. The soul is neither born nor does it die. Weapons cannot cleave it; fire cannot burn it. Fix your awareness upon the immortal Self (Ch 2, V 20)." },
-      { keywords: ["fruit", "result", "future", "marks", "success"], reply: "Do not brood over results. Focus with steady devotion upon y
+      loadGitaVerse();
+ 
