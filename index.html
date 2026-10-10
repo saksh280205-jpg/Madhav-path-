@@ -1,407 +1,517 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#102653">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MadhavPath">
-<title>MadhavPath | Devotion & Routine</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MadhavPath · माधवपथ</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#121826">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151c2e;
+      --accent: #d4af37;
+      --accent-glow: rgba(212, 175, 55, 0.25);
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --border: #222e48;
+      --saffron: #f59e0b;
+      --green: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 84px;
+    }
+    header {
+      background: linear-gradient(180deg, #18233c 0%, var(--bg) 100%);
+      padding: 18px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      color: var(--accent);
+      font-size: 1.45rem;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    header p { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+    .container { max-width: 600px; margin: 0 auto; padding: 14px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.18s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-<link rel="manifest" href="manifest.json">
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .shloka-box {
+      text-align: center;
+      padding: 16px 14px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 12px 0;
+    }
+    .sanskrit {
+      font-size: 1.25rem;
+      color: #fde68a;
+      line-height: 1.8;
+      font-weight: 600;
+      white-space: pre-line;
+      margin-bottom: 12px;
+    }
+    .translation { font-size: 0.95rem; color: var(--text); line-height: 1.5; font-style: italic; }
+    .verse-ref { font-size: 0.8rem; color: var(--saffron); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; font-weight: bold; }
 
-<style>
-:root{--navy:#102653;--blue:#1b3d78;--gold:#e8c56d;--ivory:#fffaf0;--ink:#17243a;--muted:#69758a;--line:#e8dfca;--white:#fff}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--ivory);color:var(--ink);font:14px/1.5 system-ui,-apple-system,sans-serif;padding-bottom:85px}
-header{padding:14px 16px 16px;background:linear-gradient(135deg,#0a1936,#183c74);color:#fff;border-bottom:4px solid var(--gold);border-radius:0 0 20px 20px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.brand{display:flex;align-items:center;gap:10px}
-.icon{width:42px;height:42px;background:#fff;border-radius:12px;padding:3px;box-shadow:0 3px 8px rgba(0,0,0,0.3);flex-shrink:0}
-h1{margin:0;font-size:18px;line-height:1.2}
-.tagline{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:700}
-.lang-box{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.15);border:1px solid var(--gold);color:#fff;font-size:12px}
-main{max-width:720px;margin:auto;padding:12px}
-.page{display:none}.page.active{display:block}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 3px 10px rgba(19,43,77,0.05)}
-h2{font-size:16px;color:var(--navy);margin:0 0 10px;display:flex;align-items:center;gap:8px}
-h3{font-size:13px;color:var(--blue);margin:12px 0 6px}
-.muted{color:var(--muted);font-size:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.stat{background:#f8f2e6;border-radius:10px;padding:10px;text-align:center}
-.stat small{display:block;color:var(--muted);font-size:11px}
-.stat strong{display:block;font-size:18px;color:var(--blue);margin-top:2px}
-button,input,select,textarea{font:inherit}
-button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:8px 12px;cursor:pointer;font-weight:600}
-button:active{transform:scale(0.98)}
-button.gold{background:linear-gradient(135deg,#e8c56d,#dfb651);color:var(--navy)}
-button.light{background:#edf1f8;color:var(--navy)}
-button.small{padding:5px 9px;font-size:12px}
-input,select,textarea{width:100%;padding:9px;margin:4px 0 8px;border:1px solid #d4d8e2;border-radius:8px}
-.row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}
-.task{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0}
-.task-left{display:flex;align-items:center;gap:8px}
-.task input{width:18px;height:18px;margin:0;accent-color:var(--blue)}
-.task.done span{text-decoration:line-through;color:var(--muted)}
-.progress{height:8px;background:#e8eaf0;border-radius:6px;overflow:hidden;margin:6px 0}
-.progress div{height:100%;background:linear-gradient(90deg,var(--gold),#e67e22);width:0%}
-.sanskrit{font-size:15px;line-height:1.7;color:var(--navy);font-weight:600;text-align:center;background:#fffaf0;padding:12px;border-radius:10px;border:1px dashed var(--gold);white-space:pre-line}
-.mala-wheel{width:160px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin:10px auto}
-.mala-center{position:absolute;text-align:center}
-.mala-center h3{font-size:32px;margin:0;color:var(--navy)}
-.chant-btn{width:100%;max-width:240px;height:50px;border-radius:25px;font-size:16px;margin:10px auto;display:block}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;overflow-x:auto;z-index:99;padding:4px 2px max(4px,env(safe-area-inset-bottom))}
-nav button{flex:1;min-width:44px;background:#fff;color:var(--muted);font-size:9px;padding:4px 1px;border-radius:0}
-nav button span{display:block;font-size:17px;margin-bottom:2px}
-nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
-</style>
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
+    .stat-value { font-size: 1.3rem; font-weight: bold; color: var(--accent); margin-top: 4px; }
+
+    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .btn {
+      flex: 1;
+      min-width: 110px;
+      padding: 10px 12px;
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-accent { background: var(--accent); color: #0b0f19; border: none; }
+    .btn:active { transform: scale(0.98); }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .checklist-item input { accent-color: var(--accent); width: 18px; height: 18px; }
+
+    .japa-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto;
+      background: rgba(212, 175, 55, 0.08);
+      cursor: pointer;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+    .japa-circle:active { transform: scale(0.96); }
+    .japa-count { font-size: 2rem; font-weight: bold; color: #fff; }
+    .japa-sub { font-size: 0.75rem; color: var(--muted); }
+
+    .selector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    select, input[type="text"] {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .chat-box {
+      height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .chat-msg {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      max-width: 85%;
+      line-height: 1.4;
+    }
+    .chat-msg.user { align-self: flex-end; background: #1e3a8a; color: #fff; }
+    .chat-msg.bot { align-self: flex-start; background: #1f2937; color: #fde68a; border: 1px solid var(--border); }
+    .chat-input-row { display: flex; gap: 8px; }
+
+    .game-board {
+      text-align: center;
+      padding: 16px;
+      background: #0f172a;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .opt-btn {
+      width: 100%;
+      padding: 12px;
+      background: #1e293b;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      margin-top: 8px;
+      text-align: left;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111827;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      z-index: 100;
+    }
+    .nav-item {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      width: 20%;
+    }
+    .nav-item.active { color: var(--accent); font-weight: bold; }
+    .nav-icon { font-size: 1.25rem; }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="top">
-    <div class="brand">
-      <svg class="icon" viewBox="0 0 100 100">
-        <defs>
-          <radialGradient id="eye" cx="50%" cy="32%" r="45%">
-            <stop offset="0%" stop-color="#08214d"/>
-            <stop offset="45%" stop-color="#144d7d"/>
-            <stop offset="70%" stop-color="#e8c56d"/>
-            <stop offset="100%" stop-color="#1b7875"/>
-          </radialGradient>
-        </defs>
-        <path d="M50 10 C68 26, 80 48, 52 86 C20 48, 32 26, 50 10 Z" fill="#166870"/>
-        <ellipse cx="50" cy="38" rx="14" ry="18" fill="#f0ca72"/>
-        <ellipse cx="50" cy="40" rx="9" ry="12" fill="url(#eye)"/>
-        <ellipse cx="50" cy="43" rx="5" ry="7" fill="#081832"/>
-        <path d="M50 10 L50 90" stroke="#f7e6be" stroke-width="2"/>
-      </svg>
-      <div>
-        <div class="tagline">DEVOTION · DISCIPLINE</div>
-        <h1>माधवपथ · MadhavPath</h1>
+  <header>
+    <h1>🦚 MadhavPath · माधवपथ</h1>
+    <p>Devotion · Discipline · Gita Wisdom</p>
+  </header>
+
+  <div class="container">
+    <!-- TAB 1: DAILY HOME -->
+    <div id="tab-home" class="tab-content active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Routine Done</div>
+          <div class="stat-value" id="routine-stat">0/4</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Karma XP</div>
+          <div class="stat-value" id="karma-stat">0 XP</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🌅 Daily Shloka of the Day</h2>
+        <div class="verse-ref" id="daily-ref">Chapter 2 · Verse 47</div>
+        <div class="shloka-box">
+          <div class="sanskrit" id="daily-sanskrit">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&#10;मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥</div>
+          <div class="translation" id="daily-meaning">You have a right to perform your prescribed duty, but never to the fruits of action. Never consider yourself the cause of the results, nor be attached to inaction.</div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-accent" onclick="playAudio('daily-sanskrit')">🔊 Play Audio</button>
+          <button class="btn" onclick="stopAudio()">⏹ Stop</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📿 Daily Sankalp (Routine)</h2>
+        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> Brahma Muhurta wake-up (4:30 AM)</label></div>
+        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> Morning Snan & Dhyana</label></div>
+        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> 1 Round Hare Krishna Mahamantra</label></div>
+        <div class="checklist-item"><label><input type="checkbox" onchange="toggleRoutine(this)"> Evening Gita Study</label></div>
       </div>
     </div>
-    <select id="langChoice" class="lang-box" onchange="switchLang(this.value)">
-      <option value="en">English</option>
-      <option value="hi">हिन्दी</option>
-      <option value="kn">ಕನ್ನಡ</option>
-      <option value="mr">मराठी</option>
-      <option value="te">తెలుగు</option>
-      <option value="ta">தமிழ்</option>
-      <option value="ml">മലയാളം</option>
-    </select>
+
+    <!-- TAB 2: ALL 700 GITA SHLOKAS -->
+    <div id="tab-gita" class="tab-content">
+      <div class="card">
+        <h2>📖 Complete Bhagavad Gita (All 700 Verses)</h2>
+        <div class="selector-grid">
+          <div>
+            <label style="font-size:0.75rem; color:var(--muted)">CHAPTER</label>
+            <select id="chapter-select" onchange="populateVerses()"></select>
+          </div>
+          <div>
+            <label style="font-size:0.75rem; color:var(--muted)">VERSE</label>
+            <select id="verse-select" onchange="loadSelectedVerse()"></select>
+          </div>
+        </div>
+
+        <div class="shloka-box">
+          <div class="verse-ref" id="gita-ref">Chapter 1 · Verse 1</div>
+          <div class="sanskrit" id="gita-sanskrit">धृतराष्ट्र उवाच |&#10;धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय || १-१ ||</div>
+          <div class="translation" id="gita-meaning">Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, eager to fight, what did my sons and the sons of Pandu do?</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-accent" onclick="playAudio('gita-sanskrit')">🔊 Recite Sanskrit</button>
+          <button class="btn" onclick="stopAudio()">⏹ Stop</button>
+          <button class="btn" onclick="nextVerse()">Next ❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: JAPA MALA COUNTER -->
+    <div id="tab-japa" class="tab-content">
+      <div class="card" style="text-align:center;">
+        <h2>📿 Digital Japa Mala</h2>
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:12px;">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे | हरे राम हरे राम राम राम हरे हरे ||</p>
+        <div class="japa-circle" onclick="tapJapa()">
+          <div class="japa-count" id="japa-beads">0</div>
+          <div class="japa-sub">/ 108 BEADS</div>
+        </div>
+        <div style="font-size:1.1rem; color:var(--accent); font-weight:bold; margin-bottom:12px;">
+          Completed Malas: <span id="japa-malas">0</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn" onclick="resetJapa()">🔄 Reset Count</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: MADHAV AI COACH -->
+    <div id="tab-ai" class="tab-content">
+      <div class="card">
+        <h2>🏹 Madhav AI · Gita Coach</h2>
+        <p style="font-size:0.8rem; color:var(--muted); margin-bottom:10px;">Seek Sri Krishna's counsel on your dilemmas, discipline, and daily duty.</p>
+        <div class="chat-box" id="chat-stream">
+          <div class="chat-msg bot">Radhe Radhe, Partha. What doubts cloud your intellect today? Speak freely, and let the wisdom of the Gita guide you.</div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="ai-input" placeholder="Ask Krishna a question..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+          <button class="btn btn-accent" onclick="sendAiMessage()" style="flex:0 0 75px;">Ask</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: DHARMA QUEST GAME -->
+    <div id="tab-game" class="tab-content">
+      <div class="card">
+        <h2>🎯 Gita Karma Quest</h2>
+        <div class="game-board">
+          <p style="font-size:1rem; color:var(--accent); font-weight:bold; margin-bottom:8px;">Quest XP: <span id="game-score">0</span></p>
+          <div id="game-question" style="font-size:1rem; margin-bottom:12px; color:#fff;">Loading question...</div>
+          <div id="game-options"></div>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
 
-<main>
-  <section class="page active" id="home">
-    <div class="card" style="border-left:4px solid var(--gold);background:#fffdf9">
-      <small class="muted" id="hDateDisplay"></small>
-      <h2 style="margin:2px 0 4px;font-size:15px" id="hTithiDisplay">Shukla Dashami</h2>
-      <small style="color:var(--navy);font-weight:600" id="hPanchangGlance">Nakshatra: Shravana · Yoga: Shiva</small>
-    </div>
+  <nav class="nav-bar">
+    <button class="nav-item active" onclick="switchTab('tab-home', this)"><span class="nav-icon">🌅</span>Daily</button>
+    <button class="nav-item" onclick="switchTab('tab-gita', this)"><span class="nav-icon">📖</span>700 Gita</button>
+    <button class="nav-item" onclick="switchTab('tab-japa', this)"><span class="nav-icon">📿</span>Japa</button>
+    <button class="nav-item" onclick="switchTab('tab-ai', this)"><span class="nav-icon">🏹</span>Coach</button>
+    <button class="nav-item" onclick="switchTab('tab-game', this)"><span class="nav-icon">🎯</span>Game</button>
+  </nav>
 
-    <div class="grid">
-      <div class="stat"><small>Habits Done</small><strong id="hRatio">0/0</strong></div>
-      <div class="stat"><small>Daily Progress</small><strong id="hPct">0%</strong></div>
-      <div class="stat"><small>Jaap Chants</small><strong id="hJaapVal">0</strong></div>
-      <div class="stat"><small>Water Intake</small><strong id="hWaterVal">0 ml</strong></div>
-    </div>
+  <script>
+    const CHAPTER_VERSE_COUNTS = [47, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 35, 27, 20, 24, 28, 78];
 
-    <div class="card">
-      <h2>🌅 Today's Sankalp Routine</h2>
-      <div class="progress"><div id="hBar"></div></div>
-      <div id="homeTaskList"></div>
-      <button class="gold" style="width:100%;margin-top:10px" onclick="tab('habits')">Edit Routine →</button>
-    </div>
+    const CORE_SHLOKAS = [
+      { ch: 2, v: 47, san: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥", en: "You have a right to your duty, but never to the fruits of action." },
+      { ch: 4, v: 7, san: "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥", en: "Whenever righteousness declines and unrighteousness prevails, I manifest Myself." },
+      { ch: 4, v: 8, san: "परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥", en: "To protect the virtuous, destroy the wicked, and re-establish dharma, I appear in every age." },
+      { ch: 9, v: 22, san: "अनन्‍याश्‍चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥", en: "To those who always remember Me with pure devotion, I carry what they lack and protect what they have." },
+      { ch: 18, v: 66, san: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥", en: "Abandon all dharmas and surrender unto Me alone. I will liberate you from all sins; do not despair." }
+    ];
 
-    <div class="card">
-      <h2>🦚 Bhagavad Gita</h2>
-      <div class="sanskrit" style="font-size:13px;padding:8px">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन |</div>
-      <p class="muted" style="margin:6px 0">You have a right to your duty, but not to the fruits of action.</p>
-      <button class="light small" onclick="tab('gita')">Read Gita Shlokas →</button>
-    </div>
-  </section>
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      el.classList.add('active');
+      stopAudio();
+    }
 
-  <section class="page" id="gita">
-    <div class="card">
-      <h2>🦚 श्रीमद्भगवद्गीता</h2>
-      <div class="row">
-        <div>
-          <label><small>Chapter</small></label>
-          <select id="gChapter" onchange="loadChapter(this.value)">
-            <option value="1">1. Arjuna Vishada Yoga</option>
-            <option value="2">2. Sankhya Yoga</option>
-          </select>
-        </div>
-        <div>
-          <label><small>Shloka</small></label>
-          <select id="gVerse" onchange="showVerse()"></select>
-        </div>
-      </div>
-      <div class="sanskrit" id="gSanskrit"></div>
-      <h3>Meaning (<span id="gLang">English</span>)</h3>
-      <div style="background:#fcfcfc;border-left:4px solid var(--gold);padding:10px;border-radius:0 8px 8px 0" id="gMeaning"></div>
-      <div class="row" style="margin-top:10px">
-        <button class="light small" onclick="stepVerse(-1)">← Prev</button>
-        <button class="gold small" onclick="reciteVerse()">🔊 Recite</button>
-        <button class="light small" onclick="stepVerse(1)">Next →</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="page" id="panchang">
-    <div class="card">
-      <h2>🗓️ Vedic Panchang</h2>
-      <div class="grid">
-        <div class="stat"><small>Tithi</small><b id="pTithi">Shukla Dashami</b></div>
-        <div class="stat"><small>Vāra</small><b id="pVara">Shanivara</b></div>
-        <div class="stat"><small>Nakshatra</small><b id="pNakshatra">Shravana</b></div>
-        <div class="stat"><small>Yoga</small><b id="pYoga">Shiva</b></div>
-      </div>
-      <h3>Sacred Muhurtas</h3>
-      <div class="grid">
-        <div class="stat" style="background:#eef7ee"><small>Brahma Muhurta</small><b>04:38 - 05:26 AM</b></div>
-        <div class="stat" style="background:#fdeeee"><small>Rahu Kaal</small><b>09:00 - 10:30 AM</b></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page" id="jaap">
-    <div class="card">
-      <h2>📿 Jaap Mala Counter</h2>
-      <select id="mantraList">
-        <option>Hare Krishna Hare Krishna Krishna Krishna Hare Hare, Hare Rama Hare Rama Rama Rama Hare Hare</option>
-        <option>Om Namo Bhagavate Vasudevaya</option>
-        <option>Om Namah Shivaya</option>
-      </select>
-      <div class="mala-wheel">
-        <svg viewBox="0 0 100 100" style="width:100%;height:100%;transform:rotate(-90deg)">
-          <circle cx="50" cy="50" r="42" stroke="#eee" stroke-width="6" fill="none"/>
-          <circle id="malaRing" cx="50" cy="50" r="42" stroke="var(--gold)" stroke-width="6" stroke-dasharray="264" stroke-dashoffset="264" fill="none" stroke-linecap="round"/>
-        </svg>
-        <div class="mala-center">
-          <h3 id="beadNum">0</h3>
-          <span class="muted">/ 108</span>
-        </div>
-      </div>
-      <div style="text-align:center;font-weight:700;color:var(--navy)">Malas Completed: <span id="malaDone">0</span></div>
-      <button class="gold chant-btn" onclick="chantBead()">📿 CHANT (जप)</button>
-      <div class="row" style="max-width:240px;margin:auto">
-        <button class="light small" onclick="resetBeads()">Reset Bead</button>
-        <button class="light small" onclick="resetAllMalas()">Reset All</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="page" id="habits">
-    <div class="card">
-      <h2>☀️ Daily Routine</h2>
-      <div id="habitList"></div>
-      <h3>Add Habit</h3>
-      <input id="newHabit" placeholder="e.g. Gita 15 mins, Exercise...">
-      <button class="gold" onclick="addHabit()">Add Habit</button>
-    </div>
-    <div class="card">
-      <h2>💧 Water Tracker</h2>
-      <div class="row">
-        <button class="light" onclick="modWater(-250)">-250 ml</button>
-        <b style="text-align:center;font-size:18px;color:var(--blue)" id="waterVal">0 ml</b>
-        <button class="light" onclick="modWater(250)">+250 ml</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="page" id="game">
-    <div class="card">
-      <h2>🎯 Focus Sprint & Karma Game</h2>
-      <div style="background:#0e234a;color:#fff;border-radius:12px;padding:16px;text-align:center">
-        <div>Karma Score: <b id="karmaPts" style="color:var(--gold)">0</b> XP</div>
-        <div id="gameTimer" style="font-size:40px;font-weight:800;color:var(--gold);margin:8px 0">15:00</div>
-        <div class="row" style="max-width:220px;margin:auto">
-          <button id="sprintBtn" class="gold" onclick="toggleSprint()">Start</button>
-          <button class="light" onclick="resetSprint()">Reset</button>
-        </div>
-      </div>
-      <button class="gold" style="width:100%;margin-top:12px" onclick="claimReward()">✓ Claim +50 Karma Points</button>
-    </div>
-  </section>
-</main>
-
-<nav>
-  <button class="active" data-id="home" onclick="tab('home')"><span>⌂</span>Home</button>
-  <button data-id="gita" onclick="tab('gita')"><span>🦚</span>Gita</button>
-  <button data-id="panchang" onclick="tab('panchang')"><span>🗓️</span>Panchang</button>
-  <button data-id="jaap" onclick="tab('jaap')"><span>📿</span>Jaap</button>
-  <button data-id="habits" onclick="tab('habits')"><span>☀️</span>Routine</button>
-  <button data-id="game" onclick="tab('game')"><span>🎯</span>Sprint</button>
-</nav>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js');
-  });
-}
-
-const $ = id => document.getElementById(id);
-const get = (k,d) => { try{ let v=localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch{ return d; } };
-const put = (k,v) => localStorage.setItem(k, JSON.stringify(v));
-const todayStr = new Date().toISOString().split('T')[0];
-
-const GITA = {
-  1: [
-    { s: 1, san: "धृतराष्ट्र उवाच |\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय || १-१ ||", trans: { en: "Dhritarashtra said: O Sanjaya, assembled on the sacred field of Kurukshetra, eager to fight, what did my sons and the sons of Pandu do?", hi: "धृतराष्ट्र ने कहा: हे संजय! धर्मभूमि कुरुक्षेत्र में युद्ध की इच्छा से एकत्र हुए मेरे और पाण्डु के पुत्रों ने क्या किया?", kn: "ಧೃತರಾಷ್ಟ್ರನು ಹೇಳಿದನು: ಕುರುಕ್ಷೇತ್ರದಲ್ಲಿ ಯುದ್ಧ ಮಾಡಲು ನೆರೆದ ನನ್ನ ಮತ್ತು ಪಾಂಡುವಿನ ಮಕ್ಕಳು ಏನು ಮಾಡಿದರು?", mr: "धृतराष्ट्र म्हणाला: हे संजया, धर्मक्षेत्र कुरुक्षेत्रावर युद्धाच्या इच्छेने जमलेल्या माझ्या आणि पांडूच्या पुत्रांनी काय केले?", te: "ధృతరాష్ట్రుడు పలికెను: ఓ సంజయా! కురుక్షేత్రంలో చేరిన నా పుత్రులు, పాండుపుత్రులు ఏమి చేశారు?", ta: "திருதராஷ்டிரன் கூறினார்: குருக்ஷேத்திரத்தில் போரிடத் திரண்ட என் மக்களும் பாண்டுவின் மக்களும் என்ன செய்தனர்?", ml: "ധൃതരാഷ്ട്രർ ചോദിച്ചു: കുരുക്ഷേത്രത്തിൽ യുദ്ധത്തിനായി ഒത്തുകൂടിയ എൻ്റെ മക്കളും പാണ്ഡുമക്കളും എന്തുചെയ്തു?" } },
-    { s: 2, san: "सञ्जय उवाच |\nदृष्ट्वा तु पाण्डवानीकं व्यूढं दुर्योधनस्तदा |\nआचार्यमुपसङ्गम्य राजा वचनमब्रवीत् || १-२ ||", trans: { en: "Sanjaya said: King Duryodhana, seeing the Pandava army in military formation, approached his teacher Drona and spoke.", hi: "संजय ने कहा: दुर्योधन ने व्यूहरचनायुक्त पाण्डव सेना को देखकर द्रोणाचार्य के पास जाकर यह वचन कहा।", kn: "ಸಂಜಯನು ಹೇಳಿದನು: ರಾಜ ದುರ್ಯೋಧನನು ಪಾಂಡವರ ಸೇನೆಯನ್ನು ನೋಡಿ ದ್ರೋಣಾಚಾರ್ಯರ ಬಳಿಗೆ ತೆರಳಿ ಮಾತನಾಡಿದನು.", mr: "संजय म्हणाला: दुर्योधनाने पांडवांचे सैन्य पाहून द्रोणाचार्यांकडे जाऊन पुढील शब्द उच्चारले.", te: "సంజయుడు చెప్పెను: పాండవ సైన్యాన్ని చూసి దుర్యోధనుడు ద్రోణాచార్యుని వద్దకు వెళ్ళెను.", ta: "பாண்டவப் படையைக் கண்ட துரியோதனன் துரோணரிடம் பேசினான்.", ml: "പാണ്ഡവസേനയെ കണ്ട് ദുര്യോധനൻ ദ്രോണാചാര്യരെ സമീപിച്ച് സംസാരിച്ചു." } }
-  ],
-  2: [
-    { s: 47, san: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन |\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि || २-४७ ||", trans: { en: "You have a right to perform your duty, but not to the fruits of action. Never consider yourself the cause of results, nor be attached to inaction.", hi: "तुम्हारा कर्म करने में ही अधिकार है, कर्म के फलों में कभी नहीं।", kn: "ಕರ್ಮ ಮಾಡುವುದಷ್ಟೇ ನಿನ್ನ ಅಧಿಕಾರ, ಅದರ ಫಲದಲ್ಲಲ್ಲ.", mr: "तुला फक्त कर्म करण्याचा अधिकार आहे, फळांवर कधीही नाही.", te: "నీకు కర్మ చేయుట యందే అధికారము కలదు, ఫలితములపై కాదు.", ta: "கடமையைச் செய்ய மட்டுமே உனக்கு அதிகாரம் உண்டு, பலனில் இல்லை.", ml: "കർമ്മം ചെയ്യുവാൻ മാത്രമേ നിനക്ക് അധികാരമുള്ളൂ, ഫലങ്ങളിൽ ഇല്ല." } }
-  ]
-};
-
-let curLang = get('mp_lang', 'en');
-let habits = get('mp_habits', ['Brahma Muhurta Wakeup (4:30 AM)', 'Gita Study & Contemplation', '108 Beads Chanting', 'Exercise / Surya Namaskar']);
-
-function switchLang(lang) {
-  curLang = lang;
-  put('mp_lang', lang);
-  $('langChoice').value = lang;
-  $('gLang').textContent = lang.toUpperCase();
-  showVerse();
-}
-
-function tab(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
-  $(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function loadChapter(ch) {
-  const sel = $('gVerse');
-  sel.innerHTML = (GITA[ch] || []).map(v => `<option value="${v.s}">Shloka ${v.s}</option>`).join('');
-  showVerse();
-}
-
-function showVerse() {
-  const ch = $('gChapter').value;
-  const sNum = parseInt($('gVerse').value) || 1;
-  const list = GITA[ch] || [];
-  const v = list.find(x => x.s === sNum) || list[0];
-  if (!v) return;
-  $('gSanskrit').textContent = v.san;
-  $('gMeaning').textContent = (v.trans && v.trans[curLang]) || v.trans.en;
-}
-
-function stepVerse(dir) {
-  const sel = $('gVerse');
-  if (dir > 0 && sel.selectedIndex < sel.options.length - 1) sel.selectedIndex++;
-  else if (dir < 0 && sel.selectedIndex > 0) sel.selectedIndex--;
-  showVerse();
-}
-
-function reciteVerse() {
-  if ('speechSynthesis' in window) {
-    speechSynthesis.speak(new SpeechSynthesisUtterance($('gMeaning').textContent));
-  }
-}
-
-let beads = get('mp_beads', 0);
-let malas = get('mp_malas', 0);
-
-function chantBead() {
-  beads++;
-  if (beads >= 108) {
-    beads = 0; malas++;
-    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-  } else if (navigator.vibrate) {
-    navigator.vibrate(30);
-  }
-  put('mp_beads', beads);
-  put('mp_malas', malas);
-  renderJaap();
-}
-
-function resetBeads() { beads = 0; put('mp_beads', 0); renderJaap(); }
-function resetAllMalas() { if(confirm("Reset all malas?")) { beads = 0; malas = 0; put('mp_beads',0); put('mp_malas',0); renderJaap(); } }
-
-function renderJaap() {
-  $('beadNum').textContent = beads;
-  $('malaDone').textContent = malas;
-  $('hJaapVal').textContent = `${malas} malas (${beads})`;
-  $('malaRing').style.strokeDashoffset = 264 - ((beads/108)*264);
-}
-
-function renderHabits() {
-  const checks = get('mp_chk_' + todayStr, []);
-  let html = '';
-  habits.forEach((h, i) => {
-    const isDone = checks.includes(i);
-    html += `<div class="task ${isDone?'done':''}"><div class="task-left"><input type="checkbox" ${isDone?'checked':''} onchange="toggleHabit(${i},this.checked)"><span>${h}</span></div></div>`;
-  });
-  $('habitList').innerHTML = html;
-  $('homeTaskList').innerHTML = html;
-  const pct = habits.length ? Math.round((checks.length / habits.length) * 100) : 0;
-  $('hRatio').textContent = `${checks.length}/${habits.length}`;
-  $('hPct').textContent = `${pct}%`;
-  $('hBar').style.width = `${pct}%`;
-}
-
-function toggleHabit(idx, checked) {
-  let chk = get('mp_chk_' + todayStr, []);
-  chk = checked ? [...new Set([...chk, idx])] : chk.filter(x => x !== idx);
-  put('mp_chk_' + todayStr, chk);
-  renderHabits();
-}
-
-function addHabit() {
-  const v = $('newHabit').value.trim();
-  if (!v) return;
-  habits.push(v);
-  put('mp_habits', habits);
-  $('newHabit').value = '';
-  renderHabits();
-}
-
-function modWater(n) {
-  const w = Math.max(0, get('mp_w_' + todayStr, 0) + n);
-  put('mp_w_' + todayStr, w);
-  $('waterVal').textContent = w + ' ml';$('hWaterVal').textContent = w + ' ml';
-}
-
-let sSecs = 15*60, sTimer = null;
-function toggleSprint() {
-  if (sTimer) {
-    clearInterval(sTimer); sTimer = null; $('sprintBtn').textContent = "Start";
-  } else {
-    $('sprintBtn').textContent = "Pause";
-    sTimer = setInterval(() => {
-      if (sSecs > 0) {
-        sSecs--;
-        const m = Math.floor(sSecs/60), s = sSecs%60;
-        $('gameTimer').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-      } else {
-        clearInterval(sTimer); sTimer = null; alert("Timer finished!");
+    function initGitaDropdowns() {
+      const chSelect = document.getElementById('chapter-select');
+      chSelect.innerHTML = '';
+      for (let i = 1; i <= 18; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `Chapter ${i} (${CHAPTER_VERSE_COUNTS[i-1]} Verses)`;
+        chSelect.appendChild(opt);
       }
-    }, 1000);
-  }
-}
-function resetSprint() { clearInterval(sTimer); sTimer = null; sSecs = 15*60; $('gameTimer').textContent = "15:00"; $('sprintBtn').textContent = "Start"; }
-function claimReward() {
-  let p = get('mp_karma', 0) + 50;
-  put('mp_karma', p);
-  $('karmaPts').textContent = p;
-  alert("+50 Karma Points Added!");
-}
+      populateVerses();
+    }
 
-$('hDateDisplay').textContent = new Date().toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'short', day:'numeric' });
-switchLang(curLang);
-loadChapter(1);
-renderJaap();
-renderHabits();
-$('waterVal').textContent = get('mp_w_' + todayStr, 0) + ' ml';
-$('hWaterVal').textContent = get('mp_w_' + todayStr, 0) + ' ml';$('karmaPts').textContent = get('mp_karma', 0);
-</script>
-</body>
-</html>
+    function populateVerses() {
+      const ch = parseInt(document.getElementById('chapter-select').value);
+      const vSelect = document.getElementById('verse-select');
+      const count = CHAPTER_VERSE_COUNTS[ch - 1];
+      vSelect.innerHTML = '';
+      for (let i = 1; i <= count; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `Verse ${i}`;
+        vSelect.appendChild(opt);
+      }
+      loadSelectedVerse();
+    }
+
+    async function loadSelectedVerse() {
+      const ch = document.getElementById('chapter-select').value;
+      const v = document.getElementById('verse-select').value;
+      document.getElementById('gita-ref').textContent = `Chapter ${ch} · Verse ${v}`;
+
+      const fallback = CORE_SHLOKAS.find(s => s.ch == ch && s.v == v);
+      if (fallback) {
+        document.getElementById('gita-sanskrit').textContent = fallback.san;
+        document.getElementById('gita-meaning').textContent = fallback.en;
+      } else {
+        document.getElementById('gita-sanskrit').textContent = "अध्याय " + ch + " श्लोक " + v + "\n(Loading Sacred Text...)";
+        document.getElementById('gita-meaning').textContent = "Fetching translation from sacred archive...";
+      }
+
+      try {
+        const res = await fetch(`https://vedicscriptures.github.io/slok/${ch}/${v}/`);
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('gita-sanskrit').textContent = data.slok || fallback?.san;
+          document.getElementById('gita-meaning').textContent = data.tej?.ht || data.siva?.et || data.purohit?.et || fallback?.en || "Translation loaded.";
+        }
+      } catch (err) {
+        if (!fallback) {
+          document.getElementById('gita-meaning').textContent = "Offline. Connect to the internet to fetch all dynamic verses.";
+        }
+      }
+    }
+
+    function nextVerse() {
+      const vSelect = document.getElementById('verse-select');
+      if (vSelect.selectedIndex < vSelect.options.length - 1) {
+        vSelect.selectedIndex++;
+        loadSelectedVerse();
+      } else {
+        const chSelect = document.getElementById('chapter-select');
+        if (chSelect.selectedIndex < chSelect.options.length - 1) {
+          chSelect.selectedIndex++;
+          populateVerses();
+        }
+      }
+    }
+
+    function setDailyShloka() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const day = Math.floor((now - start) / 86400000);
+      const shloka = CORE_SHLOKAS[day % CORE_SHLOKAS.length];
+      document.getElementById('daily-ref').textContent = `Chapter ${shloka.ch} · Verse ${shloka.v}`;
+      document.getElementById('daily-sanskrit').textContent = shloka.san;
+      document.getElementById('daily-meaning').textContent = shloka.en;
+    }
+
+    function playAudio(elementId) {
+      stopAudio();
+      const text = document.getElementById(elementId).textContent;
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this browser.");
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.82;
+      utterance.pitch = 0.95;
+
+      const voices = window.speechSynthesis.getVoices();
+      const voice = voices.find(v => v.lang.includes('hi') || v.lang.includes('sa') || v.lang.includes('IN'));
+      if (voice) utterance.voice = voice;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopAudio() {
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    let beads = 0;
+    let malas = 0;
+    function tapJapa() {
+      beads++;
+      if (beads >= 108) {
+        beads = 0;
+        malas++;
+        addXP(108);
+        alert("🎉 Hare Krishna! 1 Full Japa Mala completed (+108 XP)!");
+      }
+      document.getElementById('japa-beads').textContent = beads;
+      document.getElementById('japa-malas').textContent = malas;
+      if (navigator.vibrate) navigator.vibrate(40);
+    }
+    function resetJapa() {
+      beads = 0;
+      malas = 0;
+      document.getElementById('japa-beads').textContent = '0';
+      document.getElementById('japa-malas').textContent = '0';
+    }
+
+    let routineDone = 0;
+    let totalXP = 0;
+    function toggleRoutine(cb) {
+      routineDone += cb.checked ? 1 : -1;
+      document.getElementById('routine-stat').textContent = `${routineDone}/4`;
+      if (cb.checked) addXP(25);
+    }
+    function addXP(pts) {
+      totalXP += pts;
+      document.getElementById('karma-stat').textContent = `${totalXP} XP`;
+      document.getElementById('game-score').textContent = totalXP;
+    }
+
+    const GITA_KNOWLEDGE = [
+      { keywords: ["fear", "scared", "anxiety", "dar"], reply: "Cast away fear, Partha. The soul is neither born nor does it die. Weapons cannot cleave it; fire cannot burn it. Fix your awareness upon the immortal Self (Ch 2, V 20)." },
+      { keywords: ["fruit", "result", "future", "marks", "success"], reply: "Do not brood over results. Focus with steady devotion upon y
