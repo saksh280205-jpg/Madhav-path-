@@ -9,8 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="MadhavPath">
 <title>MadhavPath | Devotion & Routine</title>
 
-<!-- Embedded Web App Manifest for Chrome Installation -->
-<link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22MadhavPath%22%2C%22short_name%22%3A%22MadhavPath%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fffaf0%22%2C%22theme_color%22%3A%22%23102653%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2720%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M50%2010%20C68%2026%2C%2080%2048%2C%2052%2086%20C20%2048%2C%2032%2026%2C%2050%2010%20Z%27%20fill%3D%27%23166870%27%2F%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2738%27%20rx%3D%2714%27%20ry%3D%2718%27%20fill%3D%27%23f0ca72%27%2F%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2740%27%20rx%3D%279%27%20ry%3D%2712%27%20fill%3D%27%230e387a%27%2F%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2743%27%20rx%3D%275%27%20ry%3D%277%27%20fill%3D%27%23081832%27%2F%3E%3Cpath%20d%3D%27M50%2010%20L50%2090%27%20stroke%3D%27%23f7e6be%27%20stroke-width%3D%272%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22192x192%20512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<link rel="manifest" href="manifest.json">
 
 <style>
 :root{--navy:#102653;--blue:#1b3d78;--gold:#e8c56d;--ivory:#fffaf0;--ink:#17243a;--muted:#69758a;--line:#e8dfca;--white:#fff}
@@ -23,7 +22,6 @@ header{padding:14px 16px 16px;background:linear-gradient(135deg,#0a1936,#183c74)
 h1{margin:0;font-size:18px;line-height:1.2}
 .tagline{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:700}
 .lang-box{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.15);border:1px solid var(--gold);color:#fff;font-size:12px}
-.install-banner{background:#fff3cd;color:#856404;border:1px solid #ffeeba;padding:10px 14px;border-radius:12px;margin:12px 0;display:none;align-items:center;justify-content:space-between}
 main{max-width:720px;margin:auto;padding:12px}
 .page{display:none}.page.active{display:block}
 .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 3px 10px rgba(19,43,77,0.05)}
@@ -39,7 +37,6 @@ button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:8px 
 button:active{transform:scale(0.98)}
 button.gold{background:linear-gradient(135deg,#e8c56d,#dfb651);color:var(--navy)}
 button.light{background:#edf1f8;color:var(--navy)}
-button.red{background:#c0392b;color:#fff}
 button.small{padding:5px 9px;font-size:12px}
 input,select,textarea{width:100%;padding:9px;margin:4px 0 8px;border:1px solid #d4d8e2;border-radius:8px}
 .row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}
@@ -98,13 +95,6 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
 </header>
 
 <main>
-  <!-- Direct Install Prompt Banner (Appears when Chrome allows install) -->
-  <div id="pwaBanner" class="install-banner">
-    <div><strong>Install MadhavPath</strong><br><small>Add to your phone app drawer</small></div>
-    <button class="gold small" onclick="triggerPwaInstall()">📲 Install App</button>
-  </div>
-
-  <!-- HOME PAGE -->
   <section class="page active" id="home">
     <div class="card" style="border-left:4px solid var(--gold);background:#fffdf9">
       <small class="muted" id="hDateDisplay"></small>
@@ -128,13 +118,12 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
 
     <div class="card">
       <h2>🦚 Bhagavad Gita</h2>
-      <div class="sanskrit" style="font-size:13px;padding:8px" id="gHomeSan">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन |</div>
-      <p class="muted" id="gHomeMean" style="margin:6px 0">You have a right to your duty, but not to the fruits of action.</p>
+      <div class="sanskrit" style="font-size:13px;padding:8px">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन |</div>
+      <p class="muted" style="margin:6px 0">You have a right to your duty, but not to the fruits of action.</p>
       <button class="light small" onclick="tab('gita')">Read Gita Shlokas →</button>
     </div>
   </section>
 
-  <!-- GITA PAGE -->
   <section class="page" id="gita">
     <div class="card">
       <h2>🦚 श्रीमद्भगवद्गीता</h2>
@@ -162,7 +151,6 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
     </div>
   </section>
 
-  <!-- PANCHANG PAGE -->
   <section class="page" id="panchang">
     <div class="card">
       <h2>🗓️ Vedic Panchang</h2>
@@ -180,7 +168,6 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
     </div>
   </section>
 
-  <!-- JAAP MALA PAGE -->
   <section class="page" id="jaap">
     <div class="card">
       <h2>📿 Jaap Mala Counter</h2>
@@ -208,7 +195,6 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
     </div>
   </section>
 
-  <!-- HABITS PAGE -->
   <section class="page" id="habits">
     <div class="card">
       <h2>☀️ Daily Routine</h2>
@@ -227,7 +213,6 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
     </div>
   </section>
 
-  <!-- SPRINT GAME -->
   <section class="page" id="game">
     <div class="card">
       <h2>🎯 Focus Sprint & Karma Game</h2>
@@ -254,35 +239,12 @@ nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
 </nav>
 
 <script>
-/* ----------------------------------------------------
-   1. SERVICE WORKER INLINE (ENABLES CHROME INSTALL)
----------------------------------------------------- */
 if ('serviceWorker' in navigator) {
-  const swCode = `self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));`;
-  const blob = new Blob([swCode], { type: 'application/javascript' });
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js');
+  });
 }
 
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('pwaBanner').style.display = 'flex';
-});
-
-function triggerPwaInstall() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-      document.getElementById('pwaBanner').style.display = 'none';
-    });
-  }
-}
-
-/* ----------------------------------------------------
-   2. APP LOGIC
----------------------------------------------------- */
 const $ = id => document.getElementById(id);
 const get = (k,d) => { try{ let v=localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch{ return d; } };
 const put = (k,v) => localStorage.setItem(k, JSON.stringify(v));
@@ -345,7 +307,6 @@ function reciteVerse() {
   }
 }
 
-// Jaap
 let beads = get('mp_beads', 0);
 let malas = get('mp_malas', 0);
 
@@ -363,4 +324,84 @@ function chantBead() {
 }
 
 function resetBeads() { beads = 0; put('mp_beads', 0); renderJaap(); }
-function resetAllMalas() { if(confirm("Reset all malas?")) { beads = 0; malas = 0; put('mp_be
+function resetAllMalas() { if(confirm("Reset all malas?")) { beads = 0; malas = 0; put('mp_beads',0); put('mp_malas',0); renderJaap(); } }
+
+function renderJaap() {
+  $('beadNum').textContent = beads;
+  $('malaDone').textContent = malas;
+  $('hJaapVal').textContent = `${malas} malas (${beads})`;
+  $('malaRing').style.strokeDashoffset = 264 - ((beads/108)*264);
+}
+
+function renderHabits() {
+  const checks = get('mp_chk_' + todayStr, []);
+  let html = '';
+  habits.forEach((h, i) => {
+    const isDone = checks.includes(i);
+    html += `<div class="task ${isDone?'done':''}"><div class="task-left"><input type="checkbox" ${isDone?'checked':''} onchange="toggleHabit(${i},this.checked)"><span>${h}</span></div></div>`;
+  });
+  $('habitList').innerHTML = html;
+  $('homeTaskList').innerHTML = html;
+  const pct = habits.length ? Math.round((checks.length / habits.length) * 100) : 0;
+  $('hRatio').textContent = `${checks.length}/${habits.length}`;
+  $('hPct').textContent = `${pct}%`;
+  $('hBar').style.width = `${pct}%`;
+}
+
+function toggleHabit(idx, checked) {
+  let chk = get('mp_chk_' + todayStr, []);
+  chk = checked ? [...new Set([...chk, idx])] : chk.filter(x => x !== idx);
+  put('mp_chk_' + todayStr, chk);
+  renderHabits();
+}
+
+function addHabit() {
+  const v = $('newHabit').value.trim();
+  if (!v) return;
+  habits.push(v);
+  put('mp_habits', habits);
+  $('newHabit').value = '';
+  renderHabits();
+}
+
+function modWater(n) {
+  const w = Math.max(0, get('mp_w_' + todayStr, 0) + n);
+  put('mp_w_' + todayStr, w);
+  $('waterVal').textContent = w + ' ml';$('hWaterVal').textContent = w + ' ml';
+}
+
+let sSecs = 15*60, sTimer = null;
+function toggleSprint() {
+  if (sTimer) {
+    clearInterval(sTimer); sTimer = null; $('sprintBtn').textContent = "Start";
+  } else {
+    $('sprintBtn').textContent = "Pause";
+    sTimer = setInterval(() => {
+      if (sSecs > 0) {
+        sSecs--;
+        const m = Math.floor(sSecs/60), s = sSecs%60;
+        $('gameTimer').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      } else {
+        clearInterval(sTimer); sTimer = null; alert("Timer finished!");
+      }
+    }, 1000);
+  }
+}
+function resetSprint() { clearInterval(sTimer); sTimer = null; sSecs = 15*60; $('gameTimer').textContent = "15:00"; $('sprintBtn').textContent = "Start"; }
+function claimReward() {
+  let p = get('mp_karma', 0) + 50;
+  put('mp_karma', p);
+  $('karmaPts').textContent = p;
+  alert("+50 Karma Points Added!");
+}
+
+$('hDateDisplay').textContent = new Date().toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'short', day:'numeric' });
+switchLang(curLang);
+loadChapter(1);
+renderJaap();
+renderHabits();
+$('waterVal').textContent = get('mp_w_' + todayStr, 0) + ' ml';
+$('hWaterVal').textContent = get('mp_w_' + todayStr, 0) + ' ml';$('karmaPts').textContent = get('mp_karma', 0);
+</script>
+</body>
+</html>
