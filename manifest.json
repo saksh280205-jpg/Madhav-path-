@@ -1,12 +1,19 @@
 {
-  "name": "MadhavPath · Srimad Bhagavad Gita",
+  "name": "MadhavPath · माधवपथ",
   "short_name": "MadhavPath",
+  "description": "Devotion, Discipline, and Srimad Bhagavad Gita Wisdom",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b0f19",
-  "theme_color": "#121826",
+  "background_color": "#fcfaf2",
+  "theme_color": "#10243e",
   "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3663/3663335.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/3663/3663335.png",
       "sizes": "512x512",
