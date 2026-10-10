@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#102653">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MadhavPath">
+<title>MadhavPath | Devotion & Routine</title>
+
+<!-- Embedded Web App Manifest for Chrome Installation -->
+<link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22MadhavPath%22%2C%22short_name%22%3A%22MadhavPath%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fffaf0%22%2C%22theme_color%22%3A%22%23102653%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2720%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M50%2010%20C68%2026%2C%2080%2048%2C%2052%2086%20C20%2048%2C%2032%2026%2C%2050%2010%20Z%27%20fill%3D%27%23166870%27%2F%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2738%27%20rx%3D%2714%27%20ry%3D%2718%27%20fill%3D%27%23f0ca72%27%2F%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2740%27%20rx%3D%279%27%20ry%3D%2712%27%20fill%3D%27%230e387a%27%2F%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2743%27%20rx%3D%275%27%20ry%3D%277%27%20fill%3D%27%23081832%27%2F%3E%3Cpath%20d%3D%27M50%2010%20L50%2090%27%20stroke%3D%27%23f7e6be%27%20stroke-width%3D%272%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22192x192%20512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+
+<style>
+:root{--navy:#102653;--blue:#1b3d78;--gold:#e8c56d;--ivory:#fffaf0;--ink:#17243a;--muted:#69758a;--line:#e8dfca;--white:#fff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--ivory);color:var(--ink);font:14px/1.5 system-ui,-apple-system,sans-serif;padding-bottom:85px}
+header{padding:14px 16px 16px;background:linear-gradient(135deg,#0a1936,#183c74);color:#fff;border-bottom:4px solid var(--gold);border-radius:0 0 20px 20px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}
+.icon{width:42px;height:42px;background:#fff;border-radius:12px;padding:3px;box-shadow:0 3px 8px rgba(0,0,0,0.3);flex-shrink:0}
+h1{margin:0;font-size:18px;line-height:1.2}
+.tagline{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:700}
+.lang-box{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.15);border:1px solid var(--gold);color:#fff;font-size:12px}
+.install-banner{background:#fff3cd;color:#856404;border:1px solid #ffeeba;padding:10px 14px;border-radius:12px;margin:12px 0;display:none;align-items:center;justify-content:space-between}
+main{max-width:720px;margin:auto;padding:12px}
+.page{display:none}.page.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0;box-shadow:0 3px 10px rgba(19,43,77,0.05)}
+h2{font-size:16px;color:var(--navy);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+h3{font-size:13px;color:var(--blue);margin:12px 0 6px}
+.muted{color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{background:#f8f2e6;border-radius:10px;padding:10px;text-align:center}
+.stat small{display:block;color:var(--muted);font-size:11px}
+.stat strong{display:block;font-size:18px;color:var(--blue);margin-top:2px}
+button,input,select,textarea{font:inherit}
+button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:8px 12px;cursor:pointer;font-weight:600}
+button:active{transform:scale(0.98)}
+button.gold{background:linear-gradient(135deg,#e8c56d,#dfb651);color:var(--navy)}
+button.light{background:#edf1f8;color:var(--navy)}
+button.red{background:#c0392b;color:#fff}
+button.small{padding:5px 9px;font-size:12px}
+input,select,textarea{width:100%;padding:9px;margin:4px 0 8px;border:1px solid #d4d8e2;border-radius:8px}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}
+.task{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0}
+.task-left{display:flex;align-items:center;gap:8px}
+.task input{width:18px;height:18px;margin:0;accent-color:var(--blue)}
+.task.done span{text-decoration:line-through;color:var(--muted)}
+.progress{height:8px;background:#e8eaf0;border-radius:6px;overflow:hidden;margin:6px 0}
+.progress div{height:100%;background:linear-gradient(90deg,var(--gold),#e67e22);width:0%}
+.sanskrit{font-size:15px;line-height:1.7;color:var(--navy);font-weight:600;text-align:center;background:#fffaf0;padding:12px;border-radius:10px;border:1px dashed var(--gold);white-space:pre-line}
+.mala-wheel{width:160px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin:10px auto}
+.mala-center{position:absolute;text-align:center}
+.mala-center h3{font-size:32px;margin:0;color:var(--navy)}
+.chant-btn{width:100%;max-width:240px;height:50px;border-radius:25px;font-size:16px;margin:10px auto;display:block}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;overflow-x:auto;z-index:99;padding:4px 2px max(4px,env(safe-area-inset-bottom))}
+nav button{flex:1;min-width:44px;background:#fff;color:var(--muted);font-size:9px;padding:4px 1px;border-radius:0}
+nav button span{display:block;font-size:17px;margin-bottom:2px}
+nav button.active{background:#edf1f8;color:var(--navy);font-weight:700}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div class="brand">
+      <svg class="icon" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="eye" cx="50%" cy="32%" r="45%">
+            <stop offset="0%" stop-color="#08214d"/>
+            <stop offset="45%" stop-color="#144d7d"/>
+            <stop offset="70%" stop-color="#e8c56d"/>
+            <stop offset="100%" stop-color="#1b7875"/>
+          </radialGradient>
+        </defs>
+        <path d="M50 10 C68 26, 80 48, 52 86 C20 48, 32 26, 50 10 Z" fill="#166870"/>
+        <ellipse cx="50" cy="38" rx="14" ry="18" fill="#f0ca72"/>
+        <ellipse cx="50" cy="40" rx="9" ry="12" fill="url(#eye)"/>
+        <ellipse cx="50" cy="43" rx="5" ry="7" fill="#081832"/>
+        <path d="M50 10 L50 90" stroke="#f7e6be" stroke-width="2"/>
+      </svg>
+      <div>
+        <div class="tagline">DEVOTION · DISCIPLINE</div>
+        <h1>माधवपथ · MadhavPath</h1>
+      </div>
+    </div>
+    <select id="langChoice" class="lang-box" onchange="switchLang(this.value)">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="mr">मराठी</option>
+      <option value="te">తెలుగు</option>
+      <option value="ta">தமிழ்</option>
+      <option value="ml">മലയാളം</option>
+    </select>
+  </div>
+</header>
+
+<main>
+  <!-- Direct Install Prompt Banner (Appears when Chrome allows install) -->
+  <div id="pwaBanner" class="install-banner">
+    <div><strong>Install MadhavPath</strong><br><small>Add to your phone app drawer</small></div>
+    <button class="gold small" onclick="triggerPwaInstall()">📲 Install App</button>
+  </div>
+
+  <!-- HOME PAGE -->
+  <section class="page active" id="home">
+    <div class="card" style="border-left:4px solid var(--gold);background:#fffdf9">
+      <small class="muted" id="hDateDisplay"></small>
+      <h2 style="margin:2px 0 4px;font-size:15px" id="hTithiDisplay">Shukla Dashami</h2>
+      <small style="color:var(--navy);font-weight:600" id="hPanchangGlance">Nakshatra: Shravana · Yoga: Shiva</small>
+    </div>
+
+    <div class="grid">
+      <div class="stat"><small>Habits Done</small><strong id="hRatio">0/0</strong></div>
+      <div class="stat"><small>Daily Progress</small><strong id="hPct">0%</strong></div>
+      <div class="stat"><small>Jaap Chants</small><strong id="hJaapVal">0</strong></div>
+      <div class="stat"><small>Water Intake</small><strong id="hWaterVal">0 ml</strong></div>
+    </div>
+
+    <div class="card">
+      <h2>🌅 Today's Sankalp Routine</h2>
+      <div class="progress"><div id="hBar"></div></div>
+      <div id="homeTaskList"></div>
+      <button class="gold" style="width:100%;margin-top:10px" onclick="tab('habits')">Edit Routine →</button>
+    </div>
+
+    <div class="card">
+      <h2>🦚 Bhagavad Gita</h2>
+      <div class="sanskrit" style="font-size:13px;padding:8px" id="gHomeSan">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन |</div>
+      <p class="muted" id="gHomeMean" style="margin:6px 0">You have a right to your duty, but not to the fruits of action.</p>
+      <button class="light small" onclick="tab('gita')">Read Gita Shlokas →</button>
+    </div>
+  </section>
+
+  <!-- GITA PAGE -->
+  <section class="page" id="gita">
+    <div class="card">
+      <h2>🦚 श्रीमद्भगवद्गीता</h2>
+      <div class="row">
+        <div>
+          <label><small>Chapter</small></label>
+          <select id="gChapter" onchange="loadChapter(this.value)">
+            <option value="1">1. Arjuna Vishada Yoga</option>
+            <option value="2">2. Sankhya Yoga</option>
+          </select>
+        </div>
+        <div>
+          <label><small>Shloka</small></label>
+          <select id="gVerse" onchange="showVerse()"></select>
+        </div>
+      </div>
+      <div class="sanskrit" id="gSanskrit"></div>
+      <h3>Meaning (<span id="gLang">English</span>)</h3>
+      <div style="background:#fcfcfc;border-left:4px solid var(--gold);padding:10px;border-radius:0 8px 8px 0" id="gMeaning"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="light small" onclick="stepVerse(-1)">← Prev</button>
+        <button class="gold small" onclick="reciteVerse()">🔊 Recite</button>
+        <button class="light small" onclick="stepVerse(1)">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANCHANG PAGE -->
+  <section class="page" id="panchang">
+    <div class="card">
+      <h2>🗓️ Vedic Panchang</h2>
+      <div class="grid">
+        <div class="stat"><small>Tithi</small><b id="pTithi">Shukla Dashami</b></div>
+        <div class="stat"><small>Vāra</small><b id="pVara">Shanivara</b></div>
+        <div class="stat"><small>Nakshatra</small><b id="pNakshatra">Shravana</b></div>
+        <div class="stat"><small>Yoga</small><b id="pYoga">Shiva</b></div>
+      </div>
+      <h3>Sacred Muhurtas</h3>
+      <div class="grid">
+        <div class="stat" style="background:#eef7ee"><small>Brahma Muhurta</small><b>04:38 - 05:26 AM</b></div>
+        <div class="stat" style="background:#fdeeee"><small>Rahu Kaal</small><b>09:00 - 10:30 AM</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JAAP MALA PAGE -->
+  <section class="page" id="jaap">
+    <div class="card">
+      <h2>📿 Jaap Mala Counter</h2>
+      <select id="mantraList">
+        <option>Hare Krishna Hare Krishna Krishna Krishna Hare Hare, Hare Rama Hare Rama Rama Rama Hare Hare</option>
+        <option>Om Namo Bhagavate Vasudevaya</option>
+        <option>Om Namah Shivaya</option>
+      </select>
+      <div class="mala-wheel">
+        <svg viewBox="0 0 100 100" style="width:100%;height:100%;transform:rotate(-90deg)">
+          <circle cx="50" cy="50" r="42" stroke="#eee" stroke-width="6" fill="none"/>
+          <circle id="malaRing" cx="50" cy="50" r="42" stroke="var(--gold)" stroke-width="6" stroke-dasharray="264" stroke-dashoffset="264" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="mala-center">
+          <h3 id="beadNum">0</h3>
+          <span class="muted">/ 108</span>
+        </div>
+      </div>
+      <div style="text-align:center;font-weight:700;color:var(--navy)">Malas Completed: <span id="malaDone">0</span></div>
+      <button class="gold chant-btn" onclick="chantBead()">📿 CHANT (जप)</button>
+      <div class="row" style="max-width:240px;margin:auto">
+        <button class="light small" onclick="resetBeads()">Reset Bead</button>
+        <button class="light small" onclick="resetAllMalas()">Reset All</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABITS PAGE -->
+  <section class="page" id="habits">
+    <div class="card">
+      <h2>☀️ Daily Routine</h2>
+      <div id="habitList"></div>
+      <h3>Add Habit</h3>
+      <input id="newHabit" placeholder="e.g. Gita 15 mins, Exercise...">
+      <button class="gold" onclick="addHabit()">Add Habit</button>
+    </div>
+    <div class="card">
+      <h2>💧 Water Tracker</h2>
+      <div class="row">
+        <button class="light" onclick="modWater(-250)">-250 ml</button>
+        <b style="text-align:center;font-size:18px;color:var(--blue)" id="waterVal">0 ml</b>
+        <button class="light" onclick="modWater(250)">+250 ml</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPRINT GAME -->
+  <section class="page" id="game">
+    <div class="card">
+      <h2>🎯 Focus Sprint & Karma Game</h2>
+      <div style="background:#0e234a;color:#fff;border-radius:12px;padding:16px;text-align:center">
+        <div>Karma Score: <b id="karmaPts" style="color:var(--gold)">0</b> XP</div>
+        <div id="gameTimer" style="font-size:40px;font-weight:800;color:var(--gold);margin:8px 0">15:00</div>
+        <div class="row" style="max-width:220px;margin:auto">
+          <button id="sprintBtn" class="gold" onclick="toggleSprint()">Start</button>
+          <button class="light" onclick="resetSprint()">Reset</button>
+        </div>
+      </div>
+      <button class="gold" style="width:100%;margin-top:12px" onclick="claimReward()">✓ Claim +50 Karma Points</button>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button class="active" data-id="home" onclick="tab('home')"><span>⌂</span>Home</button>
+  <button data-id="gita" onclick="tab('gita')"><span>🦚</span>Gita</button>
+  <button data-id="panchang" onclick="tab('panchang')"><span>🗓️</span>Panchang</button>
+  <button data-id="jaap" onclick="tab('jaap')"><span>📿</span>Jaap</button>
+  <button data-id="habits" onclick="tab('habits')"><span>☀️</span>Routine</button>
+  <button data-id="game" onclick="tab('game')"><span>🎯</span>Sprint</button>
+</nav>
+
+<script>
+/* ----------------------------------------------------
+   1. SERVICE WORKER INLINE (ENABLES CHROME INSTALL)
+---------------------------------------------------- */
+if ('serviceWorker' in navigator) {
+  const swCode = `self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));`;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+}
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('pwaBanner').style.display = 'flex';
+});
+
+function triggerPwaInstall() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      document.getElementById('pwaBanner').style.display = 'none';
+    });
+  }
+}
+
+/* ----------------------------------------------------
+   2. APP LOGIC
+---------------------------------------------------- */
+const $ = id => document.getElementById(id);
+const get = (k,d) => { try{ let v=localStorage.getItem(k); return v===null?d:JSON.parse(v); }catch{ return d; } };
+const put = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+const todayStr = new Date().toISOString().split('T')[0];
+
+const GITA = {
+  1: [
+    { s: 1, san: "धृतराष्ट्र उवाच |\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय || १-१ ||", trans: { en: "Dhritarashtra said: O Sanjaya, assembled on the sacred field of Kurukshetra, eager to fight, what did my sons and the sons of Pandu do?", hi: "धृतराष्ट्र ने कहा: हे संजय! धर्मभूमि कुरुक्षेत्र में युद्ध की इच्छा से एकत्र हुए मेरे और पाण्डु के पुत्रों ने क्या किया?", kn: "ಧೃತರಾಷ್ಟ್ರನು ಹೇಳಿದನು: ಕುರುಕ್ಷೇತ್ರದಲ್ಲಿ ಯುದ್ಧ ಮಾಡಲು ನೆರೆದ ನನ್ನ ಮತ್ತು ಪಾಂಡುವಿನ ಮಕ್ಕಳು ಏನು ಮಾಡಿದರು?", mr: "धृतराष्ट्र म्हणाला: हे संजया, धर्मक्षेत्र कुरुक्षेत्रावर युद्धाच्या इच्छेने जमलेल्या माझ्या आणि पांडूच्या पुत्रांनी काय केले?", te: "ధృతరాష్ట్రుడు పలికెను: ఓ సంజయా! కురుక్షేత్రంలో చేరిన నా పుత్రులు, పాండుపుత్రులు ఏమి చేశారు?", ta: "திருதராஷ்டிரன் கூறினார்: குருக்ஷேத்திரத்தில் போரிடத் திரண்ட என் மக்களும் பாண்டுவின் மக்களும் என்ன செய்தனர்?", ml: "ധൃതരാഷ്ട്രർ ചോദിച്ചു: കുരുക്ഷേത്രത്തിൽ യുദ്ധത്തിനായി ഒത്തുകൂടിയ എൻ്റെ മക്കളും പാണ്ഡുമക്കളും എന്തുചെയ്തു?" } },
+    { s: 2, san: "सञ्जय उवाच |\nदृष्ट्वा तु पाण्डवानीकं व्यूढं दुर्योधनस्तदा |\nआचार्यमुपसङ्गम्य राजा वचनमब्रवीत् || १-२ ||", trans: { en: "Sanjaya said: King Duryodhana, seeing the Pandava army in military formation, approached his teacher Drona and spoke.", hi: "संजय ने कहा: दुर्योधन ने व्यूहरचनायुक्त पाण्डव सेना को देखकर द्रोणाचार्य के पास जाकर यह वचन कहा।", kn: "ಸಂಜಯನು ಹೇಳಿದನು: ರಾಜ ದುರ್ಯೋಧನನು ಪಾಂಡವರ ಸೇನೆಯನ್ನು ನೋಡಿ ದ್ರೋಣಾಚಾರ್ಯರ ಬಳಿಗೆ ತೆರಳಿ ಮಾತನಾಡಿದನು.", mr: "संजय म्हणाला: दुर्योधनाने पांडवांचे सैन्य पाहून द्रोणाचार्यांकडे जाऊन पुढील शब्द उच्चारले.", te: "సంజయుడు చెప్పెను: పాండవ సైన్యాన్ని చూసి దుర్యోధనుడు ద్రోణాచార్యుని వద్దకు వెళ్ళెను.", ta: "பாண்டவப் படையைக் கண்ட துரியோதனன் துரோணரிடம் பேசினான்.", ml: "പാണ്ഡവസേനയെ കണ്ട് ദുര്യോധനൻ ദ്രോണാചാര്യരെ സമീപിച്ച് സംസാരിച്ചു." } }
+  ],
+  2: [
+    { s: 47, san: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन |\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि || २-४७ ||", trans: { en: "You have a right to perform your duty, but not to the fruits of action. Never consider yourself the cause of results, nor be attached to inaction.", hi: "तुम्हारा कर्म करने में ही अधिकार है, कर्म के फलों में कभी नहीं।", kn: "ಕರ್ಮ ಮಾಡುವುದಷ್ಟೇ ನಿನ್ನ ಅಧಿಕಾರ, ಅದರ ಫಲದಲ್ಲಲ್ಲ.", mr: "तुला फक्त कर्म करण्याचा अधिकार आहे, फळांवर कधीही नाही.", te: "నీకు కర్మ చేయుట యందే అధికారము కలదు, ఫలితములపై కాదు.", ta: "கடமையைச் செய்ய மட்டுமே உனக்கு அதிகாரம் உண்டு, பலனில் இல்லை.", ml: "കർമ്മം ചെയ്യുവാൻ മാത്രമേ നിനക്ക് അധികാരമുള്ളൂ, ഫലങ്ങളിൽ ഇല്ല." } }
+  ]
+};
+
+let curLang = get('mp_lang', 'en');
+let habits = get('mp_habits', ['Brahma Muhurta Wakeup (4:30 AM)', 'Gita Study & Contemplation', '108 Beads Chanting', 'Exercise / Surya Namaskar']);
+
+function switchLang(lang) {
+  curLang = lang;
+  put('mp_lang', lang);
+  $('langChoice').value = lang;
+  $('gLang').textContent = lang.toUpperCase();
+  showVerse();
+}
+
+function tab(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  $(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function loadChapter(ch) {
+  const sel = $('gVerse');
+  sel.innerHTML = (GITA[ch] || []).map(v => `<option value="${v.s}">Shloka ${v.s}</option>`).join('');
+  showVerse();
+}
+
+function showVerse() {
+  const ch = $('gChapter').value;
+  const sNum = parseInt($('gVerse').value) || 1;
+  const list = GITA[ch] || [];
+  const v = list.find(x => x.s === sNum) || list[0];
+  if (!v) return;
+  $('gSanskrit').textContent = v.san;
+  $('gMeaning').textContent = (v.trans && v.trans[curLang]) || v.trans.en;
+}
+
+function stepVerse(dir) {
+  const sel = $('gVerse');
+  if (dir > 0 && sel.selectedIndex < sel.options.length - 1) sel.selectedIndex++;
+  else if (dir < 0 && sel.selectedIndex > 0) sel.selectedIndex--;
+  showVerse();
+}
+
+function reciteVerse() {
+  if ('speechSynthesis' in window) {
+    speechSynthesis.speak(new SpeechSynthesisUtterance($('gMeaning').textContent));
+  }
+}
+
+// Jaap
+let beads = get('mp_beads', 0);
+let malas = get('mp_malas', 0);
+
+function chantBead() {
+  beads++;
+  if (beads >= 108) {
+    beads = 0; malas++;
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+  } else if (navigator.vibrate) {
+    navigator.vibrate(30);
+  }
+  put('mp_beads', beads);
+  put('mp_malas', malas);
+  renderJaap();
+}
+
+function resetBeads() { beads = 0; put('mp_beads', 0); renderJaap(); }
+function resetAllMalas() { if(confirm("Reset all malas?")) { beads = 0; malas = 0; put('mp_be
