@@ -1,549 +1,670 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MadhavPath | Devotion · Discipline · Growth</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#fcfaf2">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <style>
-    :root {
-      --bg: #fcfaf2;
-      --card-bg: #ffffff;
-      --header-bg: linear-gradient(135deg, #10243e 0%, #17375e 100%);
-      --accent-gold: #c89332;
-      --accent-gold-light: #fef8eb;
-      --accent-gold-border: #edd59b;
-      --navy: #10243e;
-      --text: #2d3748;
-      --muted: #718096;
-      --border: #ebdcc4;
-      --shadow: 0 4px 14px rgba(72, 48, 16, 0.06);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding-bottom: 86px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#102653">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>MadhavPath | Devotion, Discipline & Vedic Wisdom</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root {
+  --navy: #102653;
+  --navy-deep: #08152e;
+  --blue: #1b3d78;
+  --gold: #e8c56d;
+  --gold-glow: #f7e1a0;
+  --gold-border: #dfb651;
+  --ivory: #fffaf0;
+  --ink: #17243a;
+  --muted: #69758a;
+  --line: #e8dfca;
+  --white: #ffffff;
+  --teal: #0e7c7b;
+  --green: #2e7d32;
+  --danger: #c0392b;
+  --card-bg: #ffffff;
+}
 
-    /* TOP BANNER */
-    .top-banner {
-      background: var(--header-bg);
-      color: #fff;
-      padding: 22px 18px 24px;
-      border-radius: 0 0 24px 24px;
-      box-shadow: 0 6px 18px rgba(16, 36, 62, 0.2);
-    }
-    .banner-sub {
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      color: #dfb264;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .banner-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 6px;
-    }
-    .app-title { font-size: 1.55rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
-    .app-title span { color: #f4c46d; }
-    .lang-pill {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-    }
-    .date-str {
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font: 14px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding-bottom: 96px;
+  overflow-x: hidden;
+}
 
-    .container { max-width: 600px; margin: 0 auto; padding: 14px; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+header {
+  padding: 14px 16px 18px;
+  background: linear-gradient(135deg, #091836, #16386d);
+  color: #fff;
+  border-bottom: 4px solid var(--gold);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 6px 18px rgba(10,25,54,0.3);
+  position: relative;
+  z-index: 40;
+}
 
-    /* CARDS */
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow);
-    }
-    .panchang-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #fbf2db;
-      color: #8c5d11;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-    }
-    .panchang-subbadge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #fef3c7;
-      color: #92400e;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 10px;
-      float: right;
-    }
-    .tithi-title {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #1a202c;
-      margin: 12px 0 4px;
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-    .tithi-sub { font-size: 0.85rem; color: var(--muted); font-weight: normal; }
-    .vikram-detail { font-size: 0.82rem; color: #4a5568; margin-bottom: 14px; }
-    .panchang-btn {
-      width: 100%;
-      background: #e8b958;
-      color: #382405;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-    }
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
 
-    /* WISDOM CARD */
-    .wisdom-label {
-      color: #0d9488;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .sanskrit-text {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #1a365d;
-      line-height: 1.8;
-      white-space: pre-line;
-      margin-bottom: 10px;
-    }
-    .translation-text {
-      font-size: 0.92rem;
-      color: #4a5568;
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    /* STATS GRID */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
-      box-shadow: var(--shadow);
-    }
-    .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
-    .stat-val { font-size: 1.6rem; font-weight: 800; color: #0f2744; margin-top: 4px; }
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  border-radius: 13px;
+  padding: 3px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  border: 1.5px solid var(--gold);
+  flex-shrink: 0;
+}
 
-    /* ROUTINE */
-    .routine-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .routine-title { font-size: 1.05rem; font-weight: 800; color: #1a202c; display: flex; align-items: center; gap: 6px; }
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: #f1ebd8;
-      border-radius: 6px;
-      overflow: hidden;
-      margin: 8px 0;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: #c89332;
-      transition: width 0.3s ease;
-    }
-    .routine-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; font-style: italic; }
-    .routine-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid #f6eedb;
-      cursor: pointer;
-    }
-    .routine-item input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--accent-gold);
-      border-radius: 4px;
-    }
-    .routine-item span { font-size: 0.92rem; color: #2d3748; }
+h1 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffffff, var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    /* BUTTONS */
-    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .btn {
-      flex: 1;
-      padding: 11px 14px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      background: #fcfaf4;
-      color: #2d3748;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-    .btn-gold { background: #e8b958; color: #382405; border: none; }
+.tagline {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
-    /* FORM ELEMENTS */
-    select, input[type="text"] {
-      width: 100%;
-      background: #fff;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 11px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-    }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-    /* JAPA CIRCLE */
-    .japa-circle {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 5px solid #c89332;
-      background: #fefbf3;
-      box-shadow: 0 0 20px rgba(200, 147, 50, 0.2);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 18px auto;
-      cursor: pointer;
-    }
-    .japa-circle:active { transform: scale(0.96); }
-    .japa-num { font-size: 2.3rem; font-weight: 900; color: #10243e; }
-    .japa-sub { font-size: 0.72rem; color: var(--muted); font-weight: bold; }
+.lang-dropdown {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid var(--gold);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+}
+.lang-dropdown option { background: #fff; color: var(--ink); }
 
-    /* CHAT STREAM */
-    .chat-box {
-      height: 290px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 12px;
-      background: #f9f6ed;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-bottom: 10px;
-    }
-    .chat-msg {
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-size: 0.9rem;
-      max-width: 85%;
-      line-height: 1.45;
-    }
-    .chat-msg.user { align-self: flex-end; background: #17375e; color: #ffffff; }
-    .chat-msg.bot { align-self: flex-start; background: #ffffff; color: #1a202c; border: 1px solid var(--border); }
+.live-clock-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(232, 197, 109, 0.35);
+  border-radius: 12px;
+  font-size: 12px;
+}
+.live-clock-time {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gold-glow);
+  letter-spacing: 1px;
+}
+.live-clock-badge {
+  font-size: 10.5px;
+  background: rgba(232, 197, 109, 0.2);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--gold);
+  font-weight: 600;
+}
 
-    /* GAME BOARD */
-    .game-board {
-      text-align: center;
-      padding: 16px;
-      background: #fefcf7;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-    .opt-btn {
-      width: 100%;
-      padding: 12px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 10px;
-      margin-top: 8px;
-      text-align: left;
-      font-size: 0.9rem;
-      cursor: pointer;
-      font-weight: 600;
-    }
+main {
+  max-width: 760px;
+  margin: auto;
+  padding: 12px 14px;
+}
 
-    /* BOTTOM NAV */
-    .nav-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #ffffff;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-around;
-      padding: 8px 0 10px;
-      z-index: 100;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
-    }
-    .nav-item {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 0.72rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      width: 20%;
-      font-weight: 600;
-    }
-    .nav-item.active { color: #c89332; font-weight: 800; }
-    .nav-icon { font-size: 1.25rem; }
-  </style>
+.page { display: none; animation: fadeIn 0.22s ease-out; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 12px 0;
+  box-shadow: 0 4px 14px rgba(19,43,77,0.05);
+}
+
+h2 {
+  font-size: 16px;
+  color: var(--navy);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 13px;
+  color: var(--blue);
+  margin: 12px 0 6px;
+  font-weight: 700;
+}
+
+.muted { color: var(--muted); font-size: 12px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.stat {
+  background: #fbf7ed;
+  border: 1px solid #ebdbbe;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+}
+.stat small { display: block; color: var(--muted); font-size: 11px; font-weight: 600; }
+.stat strong { display: block; font-size: 19px; color: var(--blue); margin-top: 2px; font-weight: 800; }
+
+button, input, select, textarea { font: inherit; }
+
+button {
+  border: 0;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all .15s ease;
+}
+button:active { transform: scale(0.97); opacity: 0.9; }
+button.gold {
+  background: linear-gradient(135deg, #e8c56d, #dfb651);
+  color: var(--navy-deep);
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(223,182,81,0.3);
+}
+button.light { background: #edf1f8; color: var(--navy); }
+button.small { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
+button.w-full { width: 100%; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 4px 0 8px;
+  border: 1px solid #d4d8e2;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+textarea { min-height: 85px; resize: vertical; }
+.row { display: flex; gap: 8px; align-items: center; }
+.row > * { flex: 1; min-width: 0; }
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f2ede1;
+}
+.task-left { display: flex; align-items: center; gap: 10px; }
+.task input[type="checkbox"] { width: 19px; height: 19px; margin: 0; accent-color: var(--blue); cursor: pointer; }
+.task.done span { text-decoration: line-through; color: var(--muted); }
+.tag-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #eef2f7;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.progress {
+  height: 9px;
+  background: #e8eaf0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+.progress div {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #e67e22);
+  width: 0%;
+  transition: width .3s ease;
+}
+
+.sanskrit {
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--navy);
+  font-weight: 700;
+  text-align: center;
+  background: #fffdf7;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1.5px dashed var(--gold);
+  white-space: pre-line;
+}
+.translit { font-size: 12px; color: var(--teal); font-style: italic; text-align: center; margin: 6px 0; }
+.translation-box {
+  background: #fdfdfd;
+  border-left: 4px solid var(--gold);
+  padding: 12px 14px;
+  border-radius: 0 10px 10px 0;
+  margin: 10px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.mala-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+}
+.mala-wheel {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mala-center { position: absolute; text-align: center; }
+.mala-center h3 { font-size: 38px; margin: 0; color: var(--navy); font-weight: 900; }
+.mala-center span { font-size: 12px; color: var(--muted); font-weight: 600; }
+.chant-btn {
+  width: 100%;
+  max-width: 260px;
+  height: 56px;
+  border-radius: 28px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 900;
+  box-shadow: 0 6px 18px rgba(232,197,109,0.5);
+  margin-top: 14px;
+}
+
+.panchang-item {
+  padding: 10px;
+  background: #fbfbfb;
+  border-radius: 10px;
+  border: 1px solid #f0e9d9;
+}
+.panchang-item small { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; font-weight: 600; }
+.panchang-item b { color: var(--navy); font-size: 13px; font-weight: 700; }
+
+.game-box {
+  background: linear-gradient(145deg, #09172e, #133363);
+  color: #fff;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(9,23,46,0.3);
+}
+.timer-text {
+  font-size: 46px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin: 10px 0;
+  text-shadow: 0 0 12px rgba(232,197,109,0.3);
+}
+
+.chat-window {
+  height: 290px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: #f9fbfd;
+  margin-bottom: 10px;
+}
+.chat-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  margin: 8px 0;
+  max-width: 86%;
+  font-size: 13.5px;
+  line-height: 1.48;
+  word-break: break-word;
+}
+.chat-bubble.coach {
+  background: #edf4fc;
+  color: var(--navy);
+  border-bottom-left-radius: 2px;
+  margin-right: auto;
+  border: 1px solid #d8e5f5;
+}
+.chat-bubble.user {
+  background: var(--blue);
+  color: #fff;
+  border-bottom-right-radius: 2px;
+  margin-left: auto;
+}
+
+.diary-entry-card {
+  background: #fffdf9;
+  border: 1px solid #edd59b;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.diary-date {
+  font-size: 11px;
+  color: var(--gold-border);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.chart-bar-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 110px;
+  padding: 10px 4px 4px;
+  border-bottom: 1.5px solid #d8e0ec;
+  margin-top: 10px;
+}
+.chart-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+.chart-bar-fill {
+  width: 22px;
+  background: linear-gradient(180deg, var(--gold), var(--blue));
+  border-radius: 6px 6px 0 0;
+  min-height: 4px;
+  transition: height 0.4s ease;
+}
+.chart-day-label {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid var(--line);
+  display: flex;
+  overflow-x: auto;
+  z-index: 99;
+  padding: 4px 2px max(4px, env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 14px rgba(0,0,0,0.05);
+}
+nav button {
+  flex: 1;
+  min-width: 44px;
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 9px;
+  padding: 6px 1px;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 2px;
+}
+nav button span { display: block; font-size: 17px; margin-bottom: 2px; }
+nav button.active { background: #edf1f8; color: var(--navy); font-weight: 800; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 20, 39, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(3px);
+}
+.modal-backdrop.active { display: flex; }
+.modal-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px 20px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+  border: 1.5px solid var(--gold);
+}
+.modal-card h3 { margin: 0 0 8px; font-size: 18px; color: var(--navy); }
+.modal-card p { font-size: 13.5px; color: var(--muted); margin: 0 0 16px; line-height: 1.5; }
+</style>
 </head>
 <body>
 
-  <!-- BANNER -->
-  <div class="top-banner">
-    <div class="banner-sub">DEVOTION · DISCIPLINE · GROWTH</div>
-    <div class="banner-row">
-      <div class="app-title">🦚 माधवपथ · <span>MadhavPath</span></div>
-      <div class="lang-pill">English ▾</div>
-    </div>
-    <div class="date-str" id="top-date-str">
-      <span>🗓 Sat, 10 Oct 2026</span>
-    </div>
-  </div>
-
-  <div class="container">
-    <!-- TAB 1: TODAY / HOME -->
-    <div id="tab-home" class="tab-content active">
-      
-      <!-- PANCHANG -->
-      <div class="card">
-        <div>
-          <span class="panchang-badge">🕉 TODAY'S PANCHANG · पञ्चाङ्ग</span>
-          <span class="panchang-subbadge">🕉 मासिक शिवरात्रि व्रत</span>
-        </div>
-        <div class="tithi-title">
-          कृष्ण Chaturdashi
-          <span class="tithi-sub">Purva नक्षत्र · शनिवार</span>
-        </div>
-        <div class="vikram-detail">विक्रम 2083 · Phalguna मास · दक्षिणायन</div>
-        <button class="panchang-btn" onclick="alert('Panchang is fully active for today.')">
-          View Full Hindu Calendar & Muhurtas 🕉
-        </button>
-      </div>
-
-      <!-- DAILY WISDOM -->
-      <div class="card">
-        <div class="wisdom-label">DAILY WISDOM · नित्य उपदेश</div>
-        <div class="sanskrit-text" id="daily-sanskrit">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥</div>
-        <div class="translation-text" id="daily-meaning">Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, desirous of fighting, what did my sons and the sons of Pandu do?</div>
-        <div class="btn-row">
-          <button class="btn btn-gold" onclick="playAudio('daily-sanskrit')">🔊 Play Audio</button>
-          <button class="btn" onclick="stopAudio()">⏹ Stop</button>
-        </div>
-      </div>
-
-      <!-- ANALYTICS METRICS -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Habits Completed</div>
-          <div class="stat-val" id="habits-stat">0/6</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Daily Routine</div>
-          <div class="stat-val" id="routine-stat">0%</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Malas Chanted</div>
-          <div class="stat-val" id="malas-stat">0 Malas</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Karma Points</div>
-          <div class="stat-val" id="xp-stat">0 XP</div>
-        </div>
-      </div>
-
-      <!-- SANKALP ROUTINE -->
-      <div class="card">
-        <div class="routine-header">
-          <div class="routine-title">🌅 Today's Sankalp (Routine)</div>
-        </div>
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="routine-progress-fill"></div>
-        </div>
-        <div class="routine-desc" id="routine-desc-text">0% completed. Walk forward with quiet, steady discipline.</div>
-
-        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Brahma Muhurta wake-up (4:30 AM)</span></label></div>
-        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Snan & Surya Arghya</span></label></div>
-        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Sattvic Diet Resolution</span></label></div>
-        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>1 Round Nama Japa</span></label></div>
-        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Srimad Bhagavad Gita Study</span></label></div>
-        <div class="routine-item"><label><input type="checkbox" onchange="updateRoutine(this)"> <span>Evening Reflection (Ratri Chintan)</span></label></div>
+<header>
+  <div class="top-bar">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="eye" cx="50%" cy="32%" r="45%">
+            <stop offset="0%" stop-color="#08214d"/>
+            <stop offset="45%" stop-color="#144d7d"/>
+            <stop offset="70%" stop-color="#e8c56d"/>
+            <stop offset="100%" stop-color="#1b7875"/>
+          </radialGradient>
+          <linearGradient id="feather" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2a9d8f"/>
+            <stop offset="60%" stop-color="#125960"/>
+            <stop offset="100%" stop-color="#083038"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 8 C68 25, 82 48, 52 88 C50 91, 50 91, 48 88 C18 48, 32 25, 50 8 Z" fill="url(#feather)"/>
+        <path d="M50 14 C62 26, 74 46, 50 82 C26 46, 38 26, 50 14 Z" fill="#1b6e75" opacity="0.8"/>
+        <ellipse cx="50" cy="38" rx="14" ry="19" fill="#f0ca72"/>
+        <ellipse cx="50" cy="40" rx="9" ry="13" fill="url(#eye)"/>
+        <ellipse cx="50" cy="43" rx="5" ry="7" fill="#081a38"/>
+        <path d="M50 8 L50 94" stroke="#f6e7c1" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="tagline">Devotion · Discipline · Wisdom</div>
+        <h1>माधवपथ · MadhavPath</h1>
       </div>
     </div>
-
-    <!-- TAB 2: ALL 700 GITA VERSES -->
-    <div id="tab-gita" class="tab-content">
-      <div class="card">
-        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:12px;">📖 Srimad Bhagavad Gita (All 700 Shlokas)</h2>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
-          <div>
-            <label style="font-size:0.75rem; color:var(--muted); font-weight:700;">CHAPTER (अध्याय)</label>
-            <select id="ch-select" onchange="populateVerses()"></select>
-          </div>
-          <div>
-            <label style="font-size:0.75rem; color:var(--muted); font-weight:700;">VERSE (श्लोक)</label>
-            <select id="v-select" onchange="loadGitaVerse()"></select>
-          </div>
-        </div>
-
-        <div style="background:#fefbf3; border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; margin-bottom:12px;">
-          <div id="gita-ref" style="font-size:0.8rem; font-weight:800; color:#c89332; margin-bottom:8px;">CHAPTER 1 · VERSE 1</div>
-          <div class="sanskrit-text" id="gita-sanskrit">धृतराष्ट्र उवाच |&#10;धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय || १-१ ||</div>
-          <div class="translation-text" id="gita-meaning">Dhritarashtra said: O Sanjaya, assembled on the holy field of Kurukshetra, desirous of fighting, what did my sons and the sons of Pandu do?</div>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-gold" onclick="playAudio('gita-sanskrit')">🔊 Play Shloka</button>
-          <button class="btn" onclick="stopAudio()">⏹ Stop</button>
-          <button class="btn" onclick="nextGitaVerse()">Next ❯</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 3: JAPA MALA COUNTER -->
-    <div id="tab-japa" class="tab-content">
-      <div class="card" style="text-align:center;">
-        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:6px;">📿 Digital Japa Counter</h2>
-        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:12px;">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे | हरे राम हरे राम राम राम हरे हरे ||</p>
-        <div class="japa-circle" onclick="tapBead()">
-          <div class="japa-num" id="japa-beads-num">0</div>
-          <div class="japa-sub">/ 108 BEADS</div>
-        </div>
-        <div style="font-size:1.1rem; font-weight:800; color:#c89332; margin-bottom:12px;">
-          Completed Malas: <span id="japa-malas-num">0</span>
-        </div>
-        <div class="btn-row">
-          <button class="btn" onclick="resetJapa()">🔄 Reset Count</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 4: MADHAV AI COACH -->
-    <div id="tab-coach" class="tab-content">
-      <div class="card">
-        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:6px;">🏹 Madhav AI · Gita Guide</h2>
-        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:12px;">Confide your struggles, questions, or doubts. Receive Krishna's perspective.</p>
-        <div class="chat-box" id="coach-stream">
-          <div class="chat-msg bot">Radhe Radhe, Partha. What troubles your intellect today? Speak with an open heart.</div>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <input type="text" id="coach-input" placeholder="Ask Sri Krishna..." onkeydown="if(event.key==='Enter') sendCoachMsg()">
-          <button class="btn btn-gold" onclick="sendCoachMsg()" style="flex:0 0 75px;">Ask</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 5: DHARMA QUEST GAME -->
-    <div id="tab-game" class="tab-content">
-      <div class="card">
-        <h2 style="font-size:1.1rem; color:#1a202c; margin-bottom:8px;">🎯 Gita Karma Quest</h2>
-        <div class="game-board">
-          <div style="font-weight:800; color:#c89332; margin-bottom:8px;">Karma XP: <span id="game-xp">0</span></div>
-          <div id="game-q-text" style="font-size:1rem; font-weight:700; color:#1a202c; margin-bottom:12px;">Loading question...</div>
-          <div id="game-opt-box"></div>
-        </div>
-      </div>
+    <div class="header-actions">
+      <select id="langChoice" class="lang-dropdown" onchange="switchLang(this.value)">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="mr">मराठी</option>
+        <option value="te">తెలుగు</option>
+        <option value="ta">தமிழ்</option>
+        <option value="ml">മലയാളം</option>
+      </select>
     </div>
   </div>
 
-  <!-- NAVIGATION -->
-  <nav class="nav-bar">
-    <button class="nav-item active" onclick="switchNav('tab-home', this)"><span class="nav-icon">🌅</span>Today</button>
-    <button class="nav-item" onclick="switchNav('tab-gita', this)"><span class="nav-icon">📖</span>Gita</button>
-    <button class="nav-item" onclick="switchNav('tab-japa', this)"><span class="nav-icon">📿</span>Japa</button>
-    <button class="nav-item" onclick="switchNav('tab-coach', this)"><span class="nav-icon">🏹</span>Coach</button>
-    <button class="nav-item" onclick="switchNav('tab-game', this)"><span class="nav-icon">🎯</span>Game</button>
-  </nav>
+  <!-- LIVE DIGITAL CLOCK & VEDIC MUHURTA -->
+  <div class="live-clock-bar">
+    <div style="display:flex;align-items:center;gap:6px">
+      <span>⏰</span>
+      <span class="live-clock-time" id="liveClockDisplay">--:--:--</span>
+    </div>
+    <div class="live-clock-badge" id="liveMuhurtaBadge">⏳ Loading Muhurta...</div>
+  </div>
+</header>
 
-  <script>
-    const CHAPTER_COUNTS = [47, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 35, 27, 20, 24, 28, 78];
+<main>
 
-    const CORE_VERSES = [
-      { ch: 2, v: 47, san: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥", en: "You have a right to your duty, but never to the fruits of work." },
-      { ch: 4, v: 7, san: "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥", en: "Whenever there is a decline in righteousness, I manifest Myself." },
-      { ch: 4, v: 8, san: "परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥", en: "To protect the good, conquer wickedness, and establish dharma, I appear millenium after millenium." },
-      { ch: 9, v: 22, san: "अनन्‍याश्‍चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥", en: "To those who always remember Me with pure devotion, I provide what they lack and protect what they have." },
-      { ch: 18, v: 66, san: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥", en: "Abandon all varieties of rituals and surrender unto Me alone. I shall liberate you; do not fear." }
-    ];
+<!-- 1. HOME SCREEN -->
+<section class="page active" id="home">
+  <!-- Panchang Widget -->
+  <div class="card" style="border-left:4px solid var(--gold);background:#fffdf9">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <small class="muted" id="hGregDate"></small>
+        <h2 style="margin:2px 0 4px;font-size:15px" id="hTithiDisplay">कृष्ण Chaturdashi · Phalguna</h2>
+        <small style="color:var(--navy);font-weight:700" id="hPanchangGlance">Purva Nakshatra · शनिवार · Masik Shivaratri</small>
+      </div>
+      <button class="small light" onclick="tab('panchang')">Full Panchang →</button>
+    </div>
+  </div>
 
-    function switchNav(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      btn.classList.add('active');
-      stopAudio();
-    }
+  <div class="grid">
+    <div class="stat"><small>Habits Done</small><strong id="hHabitRatio">0/6</strong></div>
+    <div class="stat"><small>Daily Progress</small><strong id="hDailyPct">0%</strong></div>
+    <div class="stat"><small>Jaap Chants</small><strong id="hJaapCount">0</strong></div>
+    <div class="stat"><small>Water Intake</small><strong id="hWaterVal">0 ml</strong></div>
+  </div>
 
-    // 1. ALL 700 GITA VERSES
-    function initDropdowns() {
-      const ch = document.getElementById('ch-select');
-      ch.innerHTML = '';
-      for (let i = 1; i <= 18; i++) {
-        ch.innerHTML += `<option value="${i}">Chapter ${i} (${CHAPTER_COUNTS[i-1]} Shlokas)</option>`;
-      }
-      populateVerses();
-    }
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2>🌅 Today's Sankalp Routine</h2>
+      <small style="color:var(--green);font-size:10px;font-weight:700" id="autoResetNotice">● Auto-resets daily at 00:00</small>
+    </div>
+    <div class="progress"><div id="hProgressBar"></div></div>
+    <div id="homeTaskList"></div>
+    <div class="row" style="margin-top:12px">
+      <button class="gold" onclick="tab('habits')">Manage Habits →</button>
+      <button class="light" onclick="tab('game')">Focus Sprint 🎯</button>
+    </div>
+  </div>
 
-    function populateVerses() {
-      const c = parseInt(document.getElementById('ch-select').value);
-      const v = document.getElementById('v-select');
-      v.innerHTML = '';
-      for (let i = 1; i <= CHAPTER_COUNTS[c - 1]; i++) {
-        v.innerHTML += `<option value="${i}">Verse ${i}</option>`;
-      }
-      loadGitaVerse();
- 
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2>🦚 Bhagavad Gita Daily Verse</h2>
+      <span class="tag-badge" id="dailyVerseDateTag">Today</span>
+    </div>
+    <div class="sanskrit" id="homeVerseSanskrit">कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&#10;मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥</div>
+    <p class="muted" style="margin:8px 0" id="homeVerseMeaning">You have a right to perform your prescribed duty, but never to the fruits of action.</p>
+    <div class="row">
+      <button class="gold small" id="btnAudioHome" onclick="playAudioVerse('homeVerseSanskrit', this)">🔊 Recite Daily</button>
+      <button class="light small" onclick="tab('gita')">Read all 18 Chapters →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 2. GITA CHAPTERS & VERSES (ALL 700) -->
+<section class="page" id="gita">
+  <div class="card">
+    <h2>🦚 श्रीमद्भगवद्गीता · Bhagavad Gita (All 700 Shlokas)</h2>
+    <div class="row">
+      <div>
+        <label><small>Chapter</small></label>
+        <select id="gitaChapterSelect" onchange="loadChapterVerses(this.value)">
+          <option value="1">1. Arjuna Vishada Yoga (47)</option>
+          <option value="2">2. Sankhya Yoga (72)</option>
+          <option value="3">3. Karma Yoga (43)</option>
+          <option value="4">4. Jnana Karma Sanyasa (42)</option>
+          <option value="5">5. Karma Sanyasa Yoga (29)</option>
+          <option value="6">6. Dhyana Yoga (47)</option>
+          <option value="7">7. Jnana Vijnana Yoga (30)</option>
+          <option value="8">8. Akshara Brahma Yoga (28)</option>
+          <option value="9">9. Raja Vidya Guhya Yoga (34)</option>
+          <option value="10">10. Vibhuti Yoga (42)</option>
+          <option value="11">11. Vishwarupa Darshana (55)</option>
+          <option value="12">12. Bhakti Yoga (20)</option>
+          <option value="13">13. Kshetra Kshetrajna (35)</option>
+          <option value="14">14. Gunatraya Vibhaga (27)</option>
+          <option value="15">15. Purushottama Yoga (20)</option>
+          <option value="16">16. Daivasura Sampad (24)</option>
+          <option value="17">17. Shraddhatraya Vibhaga (28)</option>
+          <option value="18">18. Moksha Sanyasa Yoga (78)</option>
+        </select>
+      </div>
+      <div>
+        <label><small>Shloka Number</small></label>
+        <select id="gitaVerseSelect" onchange="displayVerse()"></select>
+      </div>
+    </div>
+
+    <div class="sanskrit" id="gSanskrit">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः...</div>
+    <div class="translit" id="gTranslit">dharmakṣetre kurukṣetre samavetā yuyutsavaḥ...</div>
+
+    <h3>Meaning (<span id="gLangLabel">English</span>)</h3>
+    <div class="translation-box" id="gMeaning">Loading sacred translation...</div>
+
+    <div class="row" style="margin-top:12px">
+      <button class="light small" onclick="stepVerse(-1)">← Prev</button>
+      <button class="gold small" id="btnAudioGita" onclick="playAudioVerse('gSanskrit', this)">🔊 Recite</button>
+      <button class="light small" onclick="stepVerse(1)">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 3. HINDU PANCHANG & CALENDAR -->
+<section class="page" id="panchang">
+  <div class="card">
+    <h2>🗓️ Vedic Panchang & Hindu Calendar</h2>
+    <div class="row" style="margin-bottom:8px">
+      <input type="date" id="panchangDate" onchange="calculatePanchang(this.value)">
+      <button class="light small" onclick="todayPanchang()">Today</button>
+    </div>
+
+    <div style="background:#fffcf5;border:1px solid #ebd8b1;padding:12px;border-radius:12px;margin-bottom:12px">
+      <div style="font-size:16px;font-weight:800;color:var(--navy)" id="pMonthEra">Phalguna Masa · Vikram Samvat 2083</div>
+      <div style="font-size:12px;color:var(--muted)" id="pAyanaRitu">Dakshinayana · Shishira Ritu</div>
+    </div>
+
+    <h3>Five Angas (पञ्चाङ्ग)</h3>
+    <div class="grid">
+      <div class="panchang-item"><small>Tithi (तिथि)</small><b id="pTithi">Krishna Chaturdashi</b></div>
+      <div class="panchang-item"><small>Vāra (वार)</small><b id="pVara">Shanivara (Saturday)</b></div>
+      <div class="panchang-item"><small>Nakshatra (नक्षत्र)</small><b id="pNakshatra">Purva Ashadha</b></div>
+      <div class="panchang-item"><small>Yoga (योग)</small><b id="pYoga">Shiva</b></div>
+      <div class="panchang-item" style="grid-column:span 2"><small>Karana (करण)</small><b id="pKarana">Garaja</b></div>
+    </div>
+
+    <h3>Muhurta & Timings (शुभ-अशुभ मुहूर्त)</h3>
+    <div class="grid">
+      <div class="panchang-item" style="border-left:3.5px solid #27ae60"><small>Brahma Muhurta</small><b id="pBrahma">04:30 AM - 05:18 AM</b></div>
+      <div class="panchang-item" style="border-left:3.5px solid #27ae60"><small>Abhijit Muhurta</small><b id="pAbhijit">11:45 AM - 12:35 PM</b></div>
+      <div class="panchang-item" style="border-left:3.5px solid #c0392b"><small>Rahu Kaal (अशुभ)</small><b id="pRahu">09:00 AM - 10:30 AM</b></div>
+      <div class="panchang-item" style="border-left:3.5px solid #c0392b"><small>Yamaganda</small><b id="pYama">01:30 PM - 03:00 PM</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. JAAP MALA COUNTER -->
+<section class="page" id="jaap">
+  <div class="card">
+    <h2>📿 Digital Jaap Mala & Chanting Counter</h2>
+    <div style="margin-bottom:10px">
+      <label><small>Select Sacred Mantra</small></label>
+      <select id="mantraSelect" oncha
